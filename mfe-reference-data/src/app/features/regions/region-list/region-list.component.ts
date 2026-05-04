@@ -11,6 +11,7 @@ import { Region } from 'mfe-reference-data/src/app/models/region.model';
   styleUrl: './region-list.component.css',
 })
 export class RegionListComponent {
+  private status=false;
   private regionService=inject(RegionService);
   regions=signal<Region[]>([]);
 
@@ -27,5 +28,20 @@ export class RegionListComponent {
         console.error('Error fetching regions:', err);
       }
     })
+  }
+
+  delete(id:number){
+    this.regionService.deleteRegion(id).subscribe({
+      next:()=>{
+        console.log('Region deleted successfully');
+        this.loadAll();
+      },
+      error:(err)=>{
+        console.error('Error deleting region:', err);
+      }
+    })
+  }
+    changeStatus(){
+    this.status=!this.status;
   }
 }

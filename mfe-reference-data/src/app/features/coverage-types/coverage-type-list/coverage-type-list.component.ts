@@ -30,4 +30,16 @@ export class CoverageTypeListComponent {
       }
     })
   }
+
+  delete(id:number){
+    this.coverageService.deleteCoverageType(id).subscribe({
+      next:(apiResponse)=>{
+        console.log("Coverage Type deleted successfully:", apiResponse);
+        this.loadAll();
+      },
+      error:(err)=>{
+        console.error("Error deleting coverage type:", err);
+      }
+    })
+  }
 }

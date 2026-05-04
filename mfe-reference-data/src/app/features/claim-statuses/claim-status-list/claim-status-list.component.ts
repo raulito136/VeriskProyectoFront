@@ -11,6 +11,7 @@ import { ClaimStatus } from 'mfe-reference-data/src/app/models/claim-status.mode
   styleUrl: './claim-status-list.component.css'
 })
 export class ClaimStatusListComponent {
+  private status=false;
   private claimService=inject(ClaimStatusService);
 
   claimsStatuses= signal<ClaimStatus[]>([]);
@@ -28,5 +29,21 @@ export class ClaimStatusListComponent {
         console.error('Error fetching claim statuses:', err);
       }
     })
+  }
+
+  delete(id:number){
+    this.claimService.deleteClaimStatus(id).subscribe({
+      next:(apiResponse)=>{
+        console.log('Claim status deleted successfully:', apiResponse);
+        this.loadAll();
+      },
+      error: (err)=>{
+        console.error('Error deleting claim status:', err);
+      }
+    })
+  }
+  
+  changeStatus(){
+    this.status=!this.status;
   }
 }
