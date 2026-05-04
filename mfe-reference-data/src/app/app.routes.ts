@@ -10,11 +10,6 @@ import { RegionFormComponent } from './features/regions/region-form/region-form.
 
 export const appRoutes: Route[] = [
   {
-    path: '',
-    redirectTo: 'claim-statuses',
-    pathMatch: 'full'
-  },
-  {
     path: 'claim-statuses',
     component: ClaimStatusListComponent
   },

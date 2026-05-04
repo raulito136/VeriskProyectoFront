@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Region } from '../models/region.model';
 import { HtmlParser } from '@angular/compiler';
+import { ApiResponse, ApiResponse, PagedResponse } from '../models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,19 +12,19 @@ export class RegionService {
   private apiUrl="http://localhost:5003/api/v1/regions";
 
   getRegions(){
-    return this.http.get(this.apiUrl);
+    return this.http.get<PagedResponse<Region>>(this.apiUrl);
   }
 
   getRegionsById(id:number){
-    return this.http.get(`${this.apiUrl}/${id}`);
+    return this.http.get<ApiResponse<Region>>(`${this.apiUrl}/${id}`);
   }
 
   createRegion(item:Region){
-    return this.http.post(this.apiUrl,item);
+    return this.http.post<ApiResponse<Region>>(this.apiUrl,item);
   }
 
   updateRegion(id:number,item:Region){
-    return this.http.put(`${this.apiUrl}/${id}`,item);
+    return this.http.put<ApiResponse<Region>>(`${this.apiUrl}/${id}`,item);
   }
 
   deleteRegion(id:number){
