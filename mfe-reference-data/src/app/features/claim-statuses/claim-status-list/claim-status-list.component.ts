@@ -6,8 +6,7 @@ import { ClaimStatus } from 'mfe-reference-data/src/app/models/claim-status.mode
 @Component({
   selector: 'app-claim-status-list',
   standalone: true,
-  imports: [CommonModule
-  ],
+  imports: [CommonModule],
   templateUrl: './claim-status-list.component.html',
   styleUrl: './claim-status-list.component.css'
 })

@@ -1,1 +1,27 @@
-<p>coverage-type-list works!</p>
+<h1>Coverage Types</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Is active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(coverageType of coverageTypes(); track coverageType.id) {
+            <tr>
+                <td>{{ coverageType.id }}</td>
+                <td>{{ coverageType.code }}</td>
+                <td>{{ coverageType.name }}</td>
+                <td>{{ coverageType.description }}</td>
+                <td>{{ coverageType.isActive ? 'Yes' : 'No' }}</td>
+            </tr>
+        } @empty{
+            <tr>
+                <td colspan="5">No coverage types found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

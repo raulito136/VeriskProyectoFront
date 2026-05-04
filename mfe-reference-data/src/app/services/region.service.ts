@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Region } from '../models/region.model';
 import { HtmlParser } from '@angular/compiler';
-import { ApiResponse, ApiResponse, PagedResponse } from '../models/api-response.model';
+import { ApiResponse, PagedResponse } from '../models/api-response.model';
 
 @Injectable({
   providedIn: 'root'

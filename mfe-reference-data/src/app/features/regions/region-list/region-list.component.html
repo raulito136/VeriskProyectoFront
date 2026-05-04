@@ -1,1 +1,25 @@
-<p>region-list works!</p>
+<h1>Region List</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Is active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(region  of regions();track region.id){
+            <tr>
+                <td>{{ region.id }}</td>
+                <td>{{ region.code }}</td>
+                <td>{{ region.name }}</td>
+                <td>{{ region.isActive }}</td>
+            </tr>
+        } @empty{
+            <tr>
+                <td colspan="4">No regions found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

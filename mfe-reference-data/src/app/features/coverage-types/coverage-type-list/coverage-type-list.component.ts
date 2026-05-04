@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CoverageTypeService } from 'mfe-reference-data/src/app/services/coverage-type.service';
+import { CoverageType } from 'mfe-reference-data/src/app/models/coverage-type.model';
+
 
 @Component({
   selector: 'app-coverage-type-list',
@@ -8,4 +11,23 @@ import { CommonModule } from '@angular/common';
   templateUrl: './coverage-type-list.component.html',
   styleUrl: './coverage-type-list.component.css',
 })
-export class CoverageTypeListComponent {}
+export class CoverageTypeListComponent {
+  private coverageService=inject(CoverageTypeService);
+  coverageTypes=signal<CoverageType[]>([]);
+
+
+  ngOnInit(){
+      this.loadAll();
+  }
+
+  loadAll(){
+    this.coverageService.getCoverageTypes().subscribe({
+      next:(apiResponse)=>{
+        this.coverageTypes.set(apiResponse.data);
+      },
+      error: (err)=>{
+        console.error('Error fetching coverage types:', err);
+      }
+    })
+  }
+}

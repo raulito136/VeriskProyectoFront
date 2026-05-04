@@ -1,1 +1,29 @@
-<p>policy-type-list works!</p>
+<h1>Policy Types</h1>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Is Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(policyType of policyTypes(); track policyType.id){
+            <tr>
+             <td>{{ policyType.id }}</td>
+              <td>{{ policyType.code }}</td>
+             <td>{{ policyType.name }}</td>
+              <td>{{ policyType.description }}</td>
+               <td>{{ policyType.isActive }}</td>
+            </tr>
+         } @empty {
+            <tr>
+                <td colspan="5">No policy types found.</td>
+            </tr>
+         }
+    </tbody>
+</table>
