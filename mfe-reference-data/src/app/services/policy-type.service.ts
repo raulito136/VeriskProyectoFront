@@ -1,0 +1,35 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { PolicyType } from '../models/policy-type.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class PolicyTypeService {
+  private http=inject(HttpClient);
+  private apiUrl="http://localhost:5003/api/v1/policy-types";
+
+  getPolicyTypes(){
+    return this.http.get(this.apiUrl);
+  }
+
+  getPolicyTypeById(id:number){
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  getPolicyTypeByCode(code:string){
+    return this.http.get(`${this.apiUrl}/by-code/${code}`);
+  }
+
+  createPolicyType(item:PolicyType){
+    return this.http.post(this.apiUrl,item);
+  }
+
+  updatePolicyType(id:number,item:PolicyType){
+    return this.http.put(`${this.apiUrl}/${id}`,item)
+  }
+
+  deletePolicyType(id:number){
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+}
