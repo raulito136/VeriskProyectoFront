@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@policy-system/ui": ["libs/ui/src/index.ts"],
       "mfe-reference-data/Routes": [
         "mfe-reference-data/src/app/remote-entry/entry.routes.ts"
       ]
