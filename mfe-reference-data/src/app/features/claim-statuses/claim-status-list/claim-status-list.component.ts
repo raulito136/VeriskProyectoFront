@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClaimStatusService } from 'mfe-reference-data/src/app/services/claim-status.service';
 import { ClaimStatus } from 'mfe-reference-data/src/app/models/claim-status.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-claim-status-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './claim-status-list.component.html',
   styleUrl: './claim-status-list.component.css'
 })

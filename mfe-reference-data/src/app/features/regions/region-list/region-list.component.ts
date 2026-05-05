@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegionService } from 'mfe-reference-data/src/app/services/region.service';
 import { Region } from 'mfe-reference-data/src/app/models/region.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-region-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './region-list.component.html',
   styleUrl: './region-list.component.css',
 })

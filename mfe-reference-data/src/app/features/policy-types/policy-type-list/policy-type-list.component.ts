@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { PolicyType } from 'mfe-reference-data/src/app/models/policy-type.model';
 import { PolicyTypeService } from 'mfe-reference-data/src/app/services/policy-type.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-policy-type-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './policy-type-list.component.html',
   styleUrl: './policy-type-list.component.css',
 })

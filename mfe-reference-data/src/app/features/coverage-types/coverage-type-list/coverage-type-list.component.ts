@@ -2,12 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CoverageTypeService } from 'mfe-reference-data/src/app/services/coverage-type.service';
 import { CoverageType } from 'mfe-reference-data/src/app/models/coverage-type.model';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-coverage-type-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './coverage-type-list.component.html',
   styleUrl: './coverage-type-list.component.css',
 })
