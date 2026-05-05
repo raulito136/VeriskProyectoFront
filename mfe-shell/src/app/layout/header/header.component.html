@@ -1,0 +1,24 @@
+<!-- mfe-shell\src\app\layout\header\header.component.html -->
+<header class="bg-blue-800 text-white shadow-md">
+  <div class="px-6 py-4 flex justify-between items-center">
+    <!-- Logo / Título -->
+    <a routerLink="/" class="text-xl font-bold tracking-wide">
+      Aseguradora MFE
+    </a>
+
+    <!-- Navegación -->
+    <nav class="flex gap-6 font-medium">
+      <a
+        routerLink="/reference-data"
+        class="hover:text-blue-200 transition-colors"
+        >Reference Data</a
+      >
+      <a routerLink="/policies" class="hover:text-blue-200 transition-colors"
+        >Policies</a
+      >
+      <a routerLink="/claims" class="hover:text-blue-200 transition-colors"
+        >Claims</a
+      >
+    </nav>
+  </div>
+</header>

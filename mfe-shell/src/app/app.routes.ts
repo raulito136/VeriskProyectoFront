@@ -1,17 +1,18 @@
-import { NxWelcomeComponent } from './nx-welcome.component';
 import { Route } from '@angular/router';
 import { loadRemoteModule } from '@nx/angular/mf';
+import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 export const appRoutes: Route[] = [
+  {
+    path: '',
+    component: WelcomeComponent,
+    pathMatch: 'full', // URL must be EMPTY
+  },
   {
     path: 'mfe-reference-data',
     loadChildren: () =>
       loadRemoteModule('mfe-reference-data', './Routes').then(
         (m) => m.remoteRoutes
       ),
-  },
-  {
-    path: '',
-    component: NxWelcomeComponent,
   },
 ];
