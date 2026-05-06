@@ -4,12 +4,11 @@ import { ClaimStatusService } from 'mfe-reference-data/src/app/services/claim-st
 import { ClaimStatus } from 'mfe-reference-data/src/app/models/claim-status.model';
 
 @Component({
-  selector: 'app-claim-status-list',
-  standalone: true,
-  imports: [CommonModule
-  ],
-  templateUrl: './claim-status-list.component.html',
-  styleUrl: './claim-status-list.component.css'
+    selector: 'app-claim-status-list',
+    imports: [CommonModule
+    ],
+    templateUrl: './claim-status-list.component.html',
+    styleUrl: './claim-status-list.component.css'
 })
 export class ClaimStatusListComponent {
   private claimService=inject(ClaimStatusService);
