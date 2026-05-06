@@ -8,3 +8,4 @@ export * from './lib/form/form.component';
 export * from './lib/table/table.component';
 export * from './lib/pagination/pagination.component';
 export * from './lib/card/card.component';
+export * from './lib/timeline/timeline.component';

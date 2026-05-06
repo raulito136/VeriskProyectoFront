@@ -11,6 +11,8 @@ import {
   TableComponent,
   PaginationComponent,
   CardComponent,
+  TimelineComponent,
+  TimelineEvent,
 } from '@policy-system/ui';
 
 @Component({
@@ -28,11 +30,19 @@ import {
     TableComponent,
     PaginationComponent,
     CardComponent,
+    TimelineComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
 export class WelcomeComponent {
+  testTimelineEvents: TimelineEvent[] = [
+    { title: 'Claim Drafted', timestamp: 'Yesterday, 10:00 AM', description: 'Agent started drafting the claim.', status: 'default' },
+    { title: 'Information Required', timestamp: 'Yesterday, 02:30 PM', description: 'Additional documents requested from customer.', status: 'warning' },
+    { title: 'Documents Uploaded', timestamp: 'Today, 09:15 AM', status: 'info' },
+    { title: 'Claim Approved', timestamp: 'Today, 11:45 AM', description: 'Claim successfully processed and approved.', status: 'success' },
+  ];
+  
   testTableCols = [
     { key: 'id', label: 'ID' },
     { key: 'name', label: 'Name' },

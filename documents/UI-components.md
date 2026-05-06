@@ -214,6 +214,34 @@ A flexible, abstract container with built-in skeleton loading functionality.
 </lib-card>
 ```
 
+### 11. Timeline (`<lib-timeline>`)
+A chronological visual component to display an audit trail or history of events.
+
+**Attributes (Inputs):**
+- `events` (`TimelineEvent[]`): An array of events to display. Each event should have the following interface:
+  ```typescript
+  interface TimelineEvent {
+    title: string;
+    timestamp: string;
+    description?: string;
+    status?: 'success' | 'warning' | 'danger' | 'info' | 'default';
+  }
+  ```
+
+**Usage Example:**
+```ts
+// In your component.ts:
+auditTrail = [
+  { title: 'Claim Drafted', timestamp: 'Yesterday, 10:00 AM', status: 'default' },
+  { title: 'Information Required', timestamp: 'Yesterday, 02:30 PM', description: 'Additional documents requested.', status: 'warning' },
+  { title: 'Claim Approved', timestamp: 'Today, 11:45 AM', status: 'success' },
+];
+```
+```html
+<!-- In your component.html: -->
+<lib-timeline [events]="auditTrail" />
+```
+
 ---
 
 ## Current Implementation Status
@@ -246,7 +274,7 @@ A flexible, abstract container with built-in skeleton loading functionality.
   - _Uso:_ Controles de "Anterior", "Siguiente" y números de página, requerido explícitamente para las tablas de `mfe-policies` y `mfe-claims`.
 - [x] **Tarjeta Configurables (`ui-card`)**
   - _Uso:_ Contenedor con sombra y bordes para agrupar visualmente la información en las vistas de detalle (`/:id`).
-- [ ] **Línea de Tiempo (`ui-timeline`)**
+- [x] **Línea de Tiempo (`ui-timeline`)**
   - _Uso:_ Componente visual cronológico requerido exclusivamente para renderizar el _"audit trail"_ en los reclamos.
 
 ### ⚠️ 4. Feedback y Estados (Feedback & States)
