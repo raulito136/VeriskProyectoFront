@@ -8,12 +8,16 @@
   "targets": {
     "build": {
       "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/mfe-reference-data",
         "index": "mfe-reference-data/src/index.html",
         "main": "mfe-reference-data/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "mfe-reference-data/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,7 +26,9 @@
             "input": "mfe-reference-data/public"
           }
         ],
-        "styles": ["mfe-reference-data/src/styles.scss"],
+        "styles": [
+          "mfe-reference-data/src/styles.scss"
+        ],
         "scripts": [],
         "customWebpackConfig": {
           "path": "mfe-reference-data/webpack.config.ts"
@@ -75,7 +81,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@angular/build:extract-i18n",
       "options": {
         "buildTarget": "mfe-reference-data:build"
       }
@@ -85,7 +91,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "mfe-reference-data/jest.config.ts"
       }

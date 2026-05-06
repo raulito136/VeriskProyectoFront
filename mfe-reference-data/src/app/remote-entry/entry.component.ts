@@ -3,9 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
-  selector: 'app-mfe-reference-data-entry',
-  template: `<router-outlet></router-outlet>`,
+    imports: [CommonModule, RouterOutlet],
+    selector: 'app-mfe-reference-data-entry',
+    template: `<router-outlet></router-outlet>`
 })
 export class RemoteEntryComponent {}
