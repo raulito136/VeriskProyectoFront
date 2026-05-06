@@ -7,6 +7,7 @@ import {
   SelectComponent,
   DatepickerComponent,
   SwitchComponent,
+  FormComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -20,6 +21,7 @@ import {
     SelectComponent,
     DatepickerComponent,
     SwitchComponent,
+    FormComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',

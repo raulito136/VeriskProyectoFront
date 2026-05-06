@@ -115,6 +115,32 @@ A toggle switch component to alternate between two states.
 <lib-switch label="Toggle Active Filter" [checked]="isActive" (checkedChange)="isActive = $event" />
 ```
 
+### 7. Form (`<lib-form>`)
+A layout component that wraps content inside a styled `<form>` tag, standardizing form headers and action buttons.
+
+**Attributes (Inputs):**
+- `title` (`string`): Optional title displayed at the top of the form.
+- `subtitle` (`string`): Optional subtitle displayed below the title.
+
+**Events (Outputs):**
+- `formSubmit` (`EventEmitter<Event>`): Emitted when the form triggers a submit action.
+
+**Content Projection (Slots):**
+- **Default (`<ng-content>`):** Used for the main form inputs and fields.
+- **Actions (`<ng-content select="[form-actions]">`):** A reserved slot for action buttons (like Save/Cancel), automatically aligned to the right.
+
+**Usage Example:**
+```html
+<lib-form title="Create Record" subtitle="Fill the details below" (formSubmit)="save()">
+  <lib-input label="Name" name="name" />
+  
+  <div form-actions>
+    <lib-button type="cancel" content="Cancel" />
+    <lib-button type="submit" content="Save" />
+  </div>
+</lib-form>
+```
+
 ---
 
 ## Current Implementation Status
@@ -136,7 +162,7 @@ A toggle switch component to alternate between two states.
   - _Uso:_ Crítico para las historias de usuario que exigen ingresar _"claim date"_ y fechas de cobertura.
 - [x] **Interruptor (`ui-toggle` o `ui-switch`)**
   - _Uso:_ Específico para el filtro de activo/inactivo (_"toggle active/inactive filter"_) en Reference Data.
-- [ ] **Cascarón de Formulario (`ui-form`)**
+- [x] **Cascarón de Formulario (`ui-form`)**
   - _Uso:_ Contenedor visual básico con `<ng-content>` para estructurar los campos y los botones de acción (Guardar/Cancelar) de manera uniforme en todos los MFEs.
 
 ### 📊 3. Visualización de Datos (Data Display)
