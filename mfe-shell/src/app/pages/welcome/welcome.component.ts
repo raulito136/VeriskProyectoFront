@@ -5,6 +5,7 @@ import {
   ButtonComponent,
   InputComponent,
   SelectComponent,
+  DatepickerComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -16,6 +17,7 @@ import {
     ButtonComponent,
     InputComponent,
     SelectComponent,
+    DatepickerComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
@@ -28,4 +30,7 @@ export class WelcomeComponent {
     { value: 'alpha-romeo', content: 'Alpha Romeo' },
     { value: 'ferrari', content: 'Ferrari' },
   ];
+
+  claimDate: string = '';
+  today: string = new Date().toISOString().split('T')[0]; // max claim date
 }

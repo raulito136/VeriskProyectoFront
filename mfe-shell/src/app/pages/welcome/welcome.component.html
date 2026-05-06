@@ -39,6 +39,11 @@
             label="Selecciona un tipo"
             [options]="carsOptions"
           />
+          <lib-datepicker
+            label="Claim date"
+            [(selectedDate)]="claimDate"
+            [maxDate]="today"
+          />
         </div>
       </div>
     </div>
