@@ -11,3 +11,4 @@ export * from './lib/card/card.component';
 export * from './lib/timeline/timeline.component';
 export * from './lib/inline-error/inline-error.component';
 export * from './lib/loader/loader.component';
+export * from './lib/use-example/use-example.component';

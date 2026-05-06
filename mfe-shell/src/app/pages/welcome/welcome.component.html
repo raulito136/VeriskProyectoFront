@@ -3,114 +3,26 @@
     <h1 class="text-6xl font-bold text-center p-6">WELCOME!</h1>
     <div class="">
       <p class="text-xl text-center p-2">Where would you like to go?</p>
-      <div class="flex gap-4 pt-2">
-        <a routerLink="/reference-data"
-          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl">Reference
-          Data</a>
-        <a routerLink="/policies"
-          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl">Policies</a>
-        <a routerLink="/claims"
-          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl">Claims</a>
-      </div>
-      <div class="bg-pink-100">
-        <p>PRUEBA DE COMPONENTES, <b>BORRAR</b></p>
-        <div class="p-8 min-fit">
-          <lib-button />
-          <lib-button type="default" />
-          <lib-button type="confirm" />
-          <lib-button type="cancel" />
-          <lib-button type="submit" />
-          <lib-button type="custom" />
-        </div>
-        <div class="p-8 min-fit">
-          <lib-input label="Prueba" placeholder="prueba1" />
-          <lib-input label="Hola" />
-          <lib-select id="select" name="select_type" label="Selecciona un tipo" [options]="carsOptions" />
-          <lib-datepicker label="Claim date" [(selectedDate)]="claimDate" [maxDate]="today" />
-          <div class="mt-4">
-            <lib-switch label="Toggle Active Filter" />
-          </div>
-        </div>
-        <div class="p-8 min-fit bg-pink-50 flex flex-col gap-8">
-          <lib-form title="Example Form" subtitle="This is a test form">
-            <lib-input label="First Name" placeholder="John" />
-            
-            <div class="mb-4">
-              <lib-input label="Last Name (Required)" placeholder="Doe" />
-              <lib-inline-error [message]="exampleError"></lib-inline-error>
-            </div>
-            
-            <div form-actions>
-              <lib-button type="cancel" />
-              <lib-button type="submit" />
-            </div>
-          </lib-form>
-
-          <lib-table [columns]="testTableCols" [data]="testTableData" />
-          
-          <lib-pagination [currentPage]="currentPage" [totalPages]="5" (pageChange)="currentPage = $event" />
-          
-          <div class="border-t border-gray-200 pt-6 mt-4">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-xl font-bold">Card Skeleton Demo</h3>
-              <lib-switch label="Toggle Loading" [checked]="isCardLoading" (checkedChange)="isCardLoading = $event" />
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-96">
-              <!-- Card 1 -->
-              <lib-card [isLoading]="isCardLoading">
-                <div card-header>
-                  <div class="bg-indigo-500 h-32 w-full flex items-center justify-center text-white font-bold text-xl">
-                    Header Image/Banner
-                  </div>
-                </div>
-                <h4 class="text-lg font-bold mb-2">Policy #12345</h4>
-                <p class="text-gray-600 text-sm">This is abstract content projected into the main body of the card.</p>
-                <div card-footer class="p-4 border-t border-gray-100 flex justify-end gap-2">
-                  <lib-button type="default" content="View" />
-                </div>
-              </lib-card>
-              
-              <!-- Card 2 -->
-              <lib-card [isLoading]="isCardLoading">
-                <h4 class="text-xl font-extrabold text-blue-700 mb-2">Different Layout</h4>
-                <p class="text-gray-800">This card doesn't use the card-header slot, proving abstraction.</p>
-                <p class="text-gray-500 mt-2 text-sm">It just has body content and a different footer.</p>
-                <div card-footer class="p-4 bg-gray-50 flex justify-between items-center">
-                  <span class="text-xs text-gray-400">Last updated: Today</span>
-                  <lib-button type="confirm" content="Accept" />
-                </div>
-              </lib-card>
-            </div>
-          </div>
-          
-          <div class="border-t border-gray-200 pt-6 mt-4">
-            <h3 class="text-xl font-bold mb-4">Audit Trail Demo</h3>
-            <div class="bg-gray-50 rounded-xl p-4">
-              <lib-timeline [events]="testTimelineEvents" />
-            </div>
-          </div>
-          
-          <div class="border-t border-gray-200 pt-6 mt-4">
-            <h3 class="text-xl font-bold mb-4">Loader Demo</h3>
-            <div class="flex flex-col sm:flex-row gap-8 items-center bg-white p-6 rounded-xl border border-gray-100">
-              <div class="flex flex-col items-center">
-                <p class="mb-4 text-sm font-medium text-gray-500">Inline Loader</p>
-                <lib-loader text="Processing data..." />
-              </div>
-              <div class="w-px h-24 bg-gray-200 hidden sm:block"></div>
-              <div class="flex flex-col items-center flex-1">
-                <p class="mb-4 text-sm font-medium text-gray-500">Global Overlay Loader</p>
-                <lib-button type="submit" content="Trigger Global Loader (2.5s)" (buttonClick)="triggerGlobalLoader()" />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="flex gap-4 pt-2 items-center justify-center">
+        <a
+          routerLink="/reference-data"
+          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl"
+          >Reference Data</a
+        >
+        <a
+          routerLink="/policies"
+          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl"
+          >Policies</a
+        >
+        <a
+          routerLink="/claims"
+          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl"
+          >Claims</a
+        >
       </div>
     </div>
+    <div class="mt-12 w-full max-w-7xl mx-auto">
+      <lib-use-example />
+    </div>
   </div>
-
-  @if (showGlobalLoader) {
-    <lib-loader [global]="true" text="Loading from server..." />
-  }
 </div>
