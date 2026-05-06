@@ -90,7 +90,27 @@
               <lib-timeline [events]="testTimelineEvents" />
             </div>
           </div>
+          
+          <div class="border-t border-gray-200 pt-6 mt-4">
+            <h3 class="text-xl font-bold mb-4">Loader Demo</h3>
+            <div class="flex flex-col sm:flex-row gap-8 items-center bg-white p-6 rounded-xl border border-gray-100">
+              <div class="flex flex-col items-center">
+                <p class="mb-4 text-sm font-medium text-gray-500">Inline Loader</p>
+                <lib-loader text="Processing data..." />
+              </div>
+              <div class="w-px h-24 bg-gray-200 hidden sm:block"></div>
+              <div class="flex flex-col items-center flex-1">
+                <p class="mb-4 text-sm font-medium text-gray-500">Global Overlay Loader</p>
+                <lib-button type="submit" content="Trigger Global Loader (2.5s)" (buttonClick)="triggerGlobalLoader()" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  @if (showGlobalLoader) {
+    <lib-loader [global]="true" text="Loading from server..." />
+  }
+</div>

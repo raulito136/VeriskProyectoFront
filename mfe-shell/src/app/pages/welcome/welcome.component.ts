@@ -14,6 +14,7 @@ import {
   TimelineComponent,
   TimelineEvent,
   InlineErrorComponent,
+  LoaderComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -33,12 +34,21 @@ import {
     CardComponent,
     TimelineComponent,
     InlineErrorComponent,
+    LoaderComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
 export class WelcomeComponent {
   exampleError: string = 'This field is required and must contain valid data.';
+  showGlobalLoader: boolean = false;
+  
+  triggerGlobalLoader() {
+    this.showGlobalLoader = true;
+    setTimeout(() => {
+      this.showGlobalLoader = false;
+    }, 2500);
+  }
   
   testTimelineEvents: TimelineEvent[] = [
     { title: 'Claim Drafted', timestamp: 'Yesterday, 10:00 AM', description: 'Agent started drafting the claim.', status: 'default' },

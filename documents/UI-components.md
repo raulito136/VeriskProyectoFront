@@ -251,7 +251,25 @@ A simple component to display validation errors beneath form fields. Renders in 
 **Usage Example:**
 ```html
 <lib-input label="Email Address" [value]="email" />
-<lib-inline-error [message]="emailError"></lib-inline-error>
+<lib-inline-error [message]="emailError" />
+```
+
+### 13. Loader/Spinner (`<lib-loader>`)
+A loading indicator component that can be used inline or as a full-screen overlay to block interactions during HTTP requests.
+
+**Attributes (Inputs):**
+- `global` (`boolean`): If `true`, the loader becomes a full-screen, semi-transparent overlay blocking the UI. Default is `false` (inline mode).
+- `text` (`string`): Optional text to display below the spinner (e.g., "Loading policies...").
+
+**Usage Example:**
+```html
+<!-- Inline mode -->
+<lib-loader text="Fetching data..." />
+
+<!-- Global overlay mode -->
+@if (isSaving) {
+  <lib-loader [global]="true" text="Saving changes..." />
+}
 ```
 
 ---
@@ -293,5 +311,5 @@ A simple component to display validation errors beneath form fields. Renders in 
 
 - [x] **Mensaje de Error en línea (`ui-inline-error`)**
   - _Uso:_ Texto rojo o pequeña caja de alerta que aparece debajo/junto a los campos de formulario, cumpliendo la regla estricta de _"The component renders errors inline"_.
-- [ ] **Indicador de Carga (`ui-spinner` o `ui-loader`)**
+- [x] **Indicador de Carga (`ui-spinner` o `ui-loader`)**
   - _Uso:_ Círculo de carga o barra de progreso para mostrar mientras los servicios Angular hacen las peticiones HTTP (`GET`/`POST`) y para el indicador global del Shell.
