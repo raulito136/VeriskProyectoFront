@@ -1,9 +1,9 @@
 {
-  "name": "mfe-reference-data",
+  "name": "mfe-claims",
   "$schema": "../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
-  "sourceRoot": "mfe-reference-data/src",
+  "sourceRoot": "mfe-claims/src",
   "tags": [],
   "targets": {
     "build": {
@@ -12,26 +12,26 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/mfe-reference-data",
-        "index": "mfe-reference-data/src/index.html",
-        "main": "mfe-reference-data/src/main.ts",
+        "outputPath": "dist/mfe-claims",
+        "index": "mfe-claims/src/index.html",
+        "main": "mfe-claims/src/main.ts",
         "polyfills": [
           "zone.js"
         ],
-        "tsConfig": "mfe-reference-data/tsconfig.app.json",
+        "tsConfig": "mfe-claims/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "mfe-reference-data/public"
+            "input": "mfe-claims/public"
           }
         ],
         "styles": [
-          "mfe-reference-data/src/styles.scss"
+          "mfe-claims/src/styles.scss"
         ],
         "scripts": [],
         "customWebpackConfig": {
-          "path": "mfe-reference-data/webpack.config.ts"
+          "path": "mfe-claims/webpack.config.ts"
         }
       },
       "configurations": {
@@ -50,7 +50,7 @@
           ],
           "outputHashing": "all",
           "customWebpackConfig": {
-            "path": "mfe-reference-data/webpack.prod.config.ts"
+            "path": "mfe-claims/webpack.prod.config.ts"
           }
         },
         "development": {
@@ -67,15 +67,15 @@
     "serve": {
       "executor": "@nx/angular:dev-server",
       "options": {
-        "port": 4201,
-        "publicHost": "http://localhost:4201"
+        "port": 4203,
+        "publicHost": "http://localhost:4203"
       },
       "configurations": {
         "production": {
-          "buildTarget": "mfe-reference-data:build:production"
+          "buildTarget": "mfe-claims:build:production"
         },
         "development": {
-          "buildTarget": "mfe-reference-data:build:development"
+          "buildTarget": "mfe-claims:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
     "extract-i18n": {
       "executor": "@angular/build:extract-i18n",
       "options": {
-        "buildTarget": "mfe-reference-data:build"
+        "buildTarget": "mfe-claims:build"
       }
     },
     "lint": {
@@ -95,23 +95,23 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "mfe-reference-data/jest.config.ts"
+        "jestConfig": "mfe-claims/jest.config.ts"
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "defaultConfiguration": "production",
       "options": {
-        "buildTarget": "mfe-reference-data:build",
-        "port": 4201,
+        "buildTarget": "mfe-claims:build",
+        "port": 4203,
         "watch": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "mfe-reference-data:build:development"
+          "buildTarget": "mfe-claims:build:development"
         },
         "production": {
-          "buildTarget": "mfe-reference-data:build:production"
+          "buildTarget": "mfe-claims:build:production"
         }
       }
     }
