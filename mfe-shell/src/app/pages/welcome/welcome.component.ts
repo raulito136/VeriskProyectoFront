@@ -13,6 +13,7 @@ import {
   CardComponent,
   TimelineComponent,
   TimelineEvent,
+  InlineErrorComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -31,11 +32,14 @@ import {
     PaginationComponent,
     CardComponent,
     TimelineComponent,
+    InlineErrorComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
 export class WelcomeComponent {
+  exampleError: string = 'This field is required and must contain valid data.';
+  
   testTimelineEvents: TimelineEvent[] = [
     { title: 'Claim Drafted', timestamp: 'Yesterday, 10:00 AM', description: 'Agent started drafting the claim.', status: 'default' },
     { title: 'Information Required', timestamp: 'Yesterday, 02:30 PM', description: 'Additional documents requested from customer.', status: 'warning' },

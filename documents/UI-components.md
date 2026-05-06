@@ -242,6 +242,18 @@ auditTrail = [
 <lib-timeline [events]="auditTrail" />
 ```
 
+### 12. Inline Error (`<lib-inline-error>`)
+A simple component to display validation errors beneath form fields. Renders in red text with an alert icon.
+
+**Attributes (Inputs):**
+- `message` (`string`): The error message to display. If empty, the component will not render anything.
+
+**Usage Example:**
+```html
+<lib-input label="Email Address" [value]="email" />
+<lib-inline-error [message]="emailError"></lib-inline-error>
+```
+
 ---
 
 ## Current Implementation Status
@@ -279,7 +291,7 @@ auditTrail = [
 
 ### ⚠️ 4. Feedback y Estados (Feedback & States)
 
-- [ ] **Mensaje de Error en línea (`ui-inline-error`)**
+- [x] **Mensaje de Error en línea (`ui-inline-error`)**
   - _Uso:_ Texto rojo o pequeña caja de alerta que aparece debajo/junto a los campos de formulario, cumpliendo la regla estricta de _"The component renders errors inline"_.
 - [ ] **Indicador de Carga (`ui-spinner` o `ui-loader`)**
   - _Uso:_ Círculo de carga o barra de progreso para mostrar mientras los servicios Angular hacen las peticiones HTTP (`GET`/`POST`) y para el indicador global del Shell.

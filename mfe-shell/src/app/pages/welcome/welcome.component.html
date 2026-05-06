@@ -34,7 +34,12 @@
         <div class="p-8 min-fit bg-pink-50 flex flex-col gap-8">
           <lib-form title="Example Form" subtitle="This is a test form">
             <lib-input label="First Name" placeholder="John" />
-            <lib-input label="Last Name" placeholder="Doe" />
+            
+            <div class="mb-4">
+              <lib-input label="Last Name (Required)" placeholder="Doe" />
+              <lib-inline-error [message]="exampleError"></lib-inline-error>
+            </div>
+            
             <div form-actions>
               <lib-button type="cancel" />
               <lib-button type="submit" />
