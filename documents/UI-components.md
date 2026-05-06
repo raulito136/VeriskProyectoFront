@@ -187,6 +187,33 @@ A navigation component to handle pagination across multiple pages of data.
 </lib-pagination>
 ```
 
+### 10. Card (`<lib-card>`)
+A flexible, abstract container with built-in skeleton loading functionality.
+
+**Attributes (Inputs):**
+- `isLoading` (`boolean`): If `true`, the card displays a generic, pulsating skeleton loader instead of its content. Default is `false`.
+
+**Content Projection (Slots):**
+- **Header (`<ng-content select="[card-header]">`):** Optional slot at the very top (useful for images or edge-to-edge banners).
+- **Default (`<ng-content>`):** Main body area with standard padding.
+- **Footer (`<ng-content select="[card-footer]">`):** Optional slot at the bottom, typically used for action buttons or metadata.
+
+**Usage Example:**
+```html
+<lib-card [isLoading]="loadingData">
+  <div card-header>
+    <img src="banner.jpg" class="w-full h-32 object-cover" />
+  </div>
+  
+  <h3 class="text-lg font-bold">Abstract Title</h3>
+  <p class="text-gray-600">Any content can go here...</p>
+  
+  <div card-footer class="p-4 border-t border-gray-100 flex justify-end">
+    <lib-button content="View Details" />
+  </div>
+</lib-card>
+```
+
 ---
 
 ## Current Implementation Status
@@ -217,7 +244,7 @@ A navigation component to handle pagination across multiple pages of data.
   - _Uso:_ Componente base para mostrar las listas de datos (Reference Data, Policies, Claims).
 - [x] **Paginador (`ui-pagination`)**
   - _Uso:_ Controles de "Anterior", "Siguiente" y números de página, requerido explícitamente para las tablas de `mfe-policies` y `mfe-claims`.
-- [ ] **Tarjeta Configurables (`ui-card`)**
+- [x] **Tarjeta Configurables (`ui-card`)**
   - _Uso:_ Contenedor con sombra y bordes para agrupar visualmente la información en las vistas de detalle (`/:id`).
 - [ ] **Línea de Tiempo (`ui-timeline`)**
   - _Uso:_ Componente visual cronológico requerido exclusivamente para renderizar el _"audit trail"_ en los reclamos.

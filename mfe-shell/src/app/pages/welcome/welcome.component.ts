@@ -10,6 +10,7 @@ import {
   FormComponent,
   TableComponent,
   PaginationComponent,
+  CardComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -26,6 +27,7 @@ import {
     FormComponent,
     TableComponent,
     PaginationComponent,
+    CardComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
@@ -42,6 +44,7 @@ export class WelcomeComponent {
   ];
   
   currentPage: number = 1;
+  isCardLoading: boolean = true;
   carsOptions = [
     { value: 'bwm', content: 'BMW' },
     { value: 'nissan', content: 'Nissan' },
