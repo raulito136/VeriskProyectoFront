@@ -98,6 +98,23 @@ A tabbed navigation component to switch between different views.
 <lib-tabs [tabs]="['Details', 'Comments', 'Audit History']" activeTab="Details" (onTabChange)="currentTab = $event" />
 ```
 
+### 6. Switch (`<lib-switch>`)
+A toggle switch component to alternate between two states.
+
+**Attributes (Inputs):**
+- `label` (`string`): The label text displayed above the switch.
+- `checked` (`boolean`): The current state of the switch (`true` for ON, `false` for OFF). Default is `false`.
+- `name` (`string`): The name attribute for the input.
+- `id` (`string`): The ID for the input field. Auto-generated if not provided.
+
+**Events (Outputs):**
+- `checkedChange` (`EventEmitter<boolean>`): Emitted when the user toggles the switch.
+
+**Usage Example:**
+```html
+<lib-switch label="Toggle Active Filter" [checked]="isActive" (checkedChange)="isActive = $event" />
+```
+
 ---
 
 ## Current Implementation Status
@@ -117,7 +134,7 @@ A tabbed navigation component to switch between different views.
   - _Uso:_ Para seleccionar el titular de la póliza y los estados fijos (_Status_).
 - [x] **Selector de Fecha (`ui-datepicker`)**
   - _Uso:_ Crítico para las historias de usuario que exigen ingresar _"claim date"_ y fechas de cobertura.
-- [ ] **Interruptor (`ui-toggle` o `ui-switch`)**
+- [x] **Interruptor (`ui-toggle` o `ui-switch`)**
   - _Uso:_ Específico para el filtro de activo/inactivo (_"toggle active/inactive filter"_) en Reference Data.
 - [ ] **Cascarón de Formulario (`ui-form`)**
   - _Uso:_ Contenedor visual básico con `<ng-content>` para estructurar los campos y los botones de acción (Guardar/Cancelar) de manera uniforme en todos los MFEs.
