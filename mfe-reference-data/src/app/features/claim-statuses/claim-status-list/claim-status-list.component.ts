@@ -12,6 +12,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './claim-status-list.component.css'
 })
 export class ClaimStatusListComponent {
+  errores= signal<string[]>([]);
   private status=false;
   private claimService=inject(ClaimStatusService);
 
@@ -22,24 +23,25 @@ export class ClaimStatusListComponent {
   }
 
   loadAll(){
+    this.errores.set([]);
     this.claimService.getClaimStatuses().subscribe({
       next:(apiResponse)=>{
         this.claimsStatuses.set(apiResponse.data);
       },
       error: (err)=>{
-        console.error('Error fetching claim statuses:', err);
+        this.errores.set([err]);
       }
     })
   }
 
   delete(id:number){
+    this.errores.set([]);
     this.claimService.deleteClaimStatus(id).subscribe({
       next:(apiResponse)=>{
-        console.log('Claim status deleted successfully:', apiResponse);
         this.loadAll();
       },
       error: (err)=>{
-        console.error('Error deleting claim status:', err);
+        this.errores.set([err]);
       }
     })
   }
