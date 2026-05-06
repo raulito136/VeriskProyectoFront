@@ -48,7 +48,7 @@
             <lib-switch label="Toggle Active Filter" />
           </div>
         </div>
-        <div class="p-8 min-fit bg-pink-50">
+        <div class="p-8 min-fit bg-pink-50 flex flex-col gap-8">
           <lib-form title="Example Form" subtitle="This is a test form">
             <lib-input label="First Name" placeholder="John" />
             <lib-input label="Last Name" placeholder="Doe" />
@@ -57,6 +57,8 @@
               <lib-button type="submit" />
             </div>
           </lib-form>
+          
+          <lib-table [columns]="testTableCols" [data]="testTableData" />
         </div>
       </div>
     </div>

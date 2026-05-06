@@ -141,6 +141,33 @@ A layout component that wraps content inside a styled `<form>` tag, standardizin
 </lib-form>
 ```
 
+### 8. Table (`<lib-table>`)
+A reusable data table component for displaying lists of data with dynamic columns.
+
+**Attributes (Inputs):**
+- `columns` (`TableColumn[]`): An array of column definitions (`{ key: string, label: string }`).
+- `data` (`any[]`): An array of data objects to render as rows.
+
+**Events (Outputs):**
+- `rowClick` (`EventEmitter<any>`): Emitted with the row data when a row is clicked.
+
+**Usage Example:**
+```ts
+// In your component.ts:
+cols = [
+  { key: 'id', label: 'ID' },
+  { key: 'name', label: 'Name' }
+];
+data = [
+  { id: 1, name: 'Policy A' },
+  { id: 2, name: 'Policy B' }
+];
+```
+```html
+<!-- In your component.html: -->
+<lib-table [columns]="cols" [data]="data" (rowClick)="onRowSelect($event)" />
+```
+
 ---
 
 ## Current Implementation Status
@@ -167,7 +194,7 @@ A layout component that wraps content inside a styled `<form>` tag, standardizin
 
 ### 📊 3. Visualización de Datos (Data Display)
 
-- [ ] **Tabla de Datos (`ui-table`)**
+- [x] **Tabla de Datos (`ui-table`)**
   - _Uso:_ Componente base para mostrar las listas de datos (Reference Data, Policies, Claims).
 - [ ] **Paginador (`ui-pagination`)**
   - _Uso:_ Controles de "Anterior", "Siguiente" y números de página, requerido explícitamente para las tablas de `mfe-policies` y `mfe-claims`.

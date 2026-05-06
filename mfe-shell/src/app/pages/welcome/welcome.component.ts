@@ -8,6 +8,7 @@ import {
   DatepickerComponent,
   SwitchComponent,
   FormComponent,
+  TableComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -22,11 +23,21 @@ import {
     DatepickerComponent,
     SwitchComponent,
     FormComponent,
+    TableComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
 export class WelcomeComponent {
+  testTableCols = [
+    { key: 'id', label: 'ID' },
+    { key: 'name', label: 'Name' },
+    { key: 'role', label: 'Role' },
+  ];
+  testTableData = [
+    { id: 1, name: 'Alice', role: 'Admin' },
+    { id: 2, name: 'Bob', role: 'User' },
+  ];
   carsOptions = [
     { value: 'bwm', content: 'BMW' },
     { value: 'nissan', content: 'Nissan' },
