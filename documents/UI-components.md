@@ -1,3 +1,107 @@
+# UI Components Library Documentation
+
+This document outlines the shared UI components available in the `libs/ui` library. These components ensure a consistent design and functionality across all microfrontends (`mfe-reference-data`, `mfe-policies`, `mfe-claims`).
+
+## Implemented Components Usage
+
+### 1. Button (`<lib-button>`)
+A reusable button component with various pre-defined styles.
+
+**Attributes (Inputs):**
+- `type` (`'default' | 'confirm' | 'cancel' | 'submit' | 'custom'`): Specifies the button style and behavior. Default is `'default'`.
+- `content` (`string`): The text to display on the button. If not provided, it defaults to a standard text based on the `type` (e.g., "Confirm" for `confirm`).
+
+**Events (Outputs):**
+- `buttonClick` (`EventEmitter<void>`): Emitted when the user clicks the button.
+
+**Usage Example:**
+```html
+<lib-button type="confirm" content="Save Changes" (buttonClick)="onSave()" />
+```
+
+### 2. Input (`<lib-input>`)
+A standard text input field with optional label and placeholder.
+
+**Attributes (Inputs):**
+- `label` (`string`): The label text displayed above the input.
+- `type` (`string`): The HTML input type (e.g., `'text'`, `'number'`, `'email'`). Default is `'text'`.
+- `placeholder` (`string`): Placeholder text for the input.
+- `value` (`string`): The current value of the input field.
+- `name` (`string`): The name attribute for the input.
+- `id` (`string`): The ID for the input field. Auto-generated if not provided.
+
+**Events (Outputs):**
+- `valueChange` (`EventEmitter<string>`): Emitted whenever the user types or changes the value.
+
+**Usage Example:**
+```html
+<lib-input label="First Name" placeholder="Enter your name" [value]="firstName" (valueChange)="firstName = $event" />
+```
+
+### 3. Datepicker (`<lib-datepicker>`)
+A date selection input component.
+
+**Attributes (Inputs):**
+- `label` (`string`): The label text displayed above the datepicker.
+- `name` (`string`): The name attribute for the datepicker.
+- `id` (`string`): The ID for the datepicker field. Auto-generated if not provided.
+- `selectedDate` (`string`): The currently selected date in `'YYYY-MM-DD'` format.
+- `minDate` (`string`): The minimum allowed date (for validation).
+- `maxDate` (`string`): The maximum allowed date (for validation).
+
+**Events (Outputs):**
+- `selectedDateChange` (`EventEmitter<string>`): Emitted when the selected date changes.
+
+**Usage Example:**
+```html
+<lib-datepicker label="Claim Date" [selectedDate]="claimDate" maxDate="2024-12-31" (selectedDateChange)="claimDate = $event" />
+```
+
+### 4. Select (`<lib-select>`)
+A dropdown selection component.
+
+**Attributes (Inputs):**
+- `label` (`string`): The label text displayed above the select dropdown.
+- `name` (`string`): The name attribute for the select.
+- `id` (`string`): The ID for the select field. Auto-generated if not provided.
+- `options` (`OptionType[]`): An array of options to display, where each option has `{ value: string | number, content: string }`.
+- `selectedOption` (`string | number`): The currently selected value.
+
+**Events (Outputs):**
+- `selectedOptionChange` (`EventEmitter<string | number>`): Emitted when the selected option changes.
+
+**Usage Example:**
+```ts
+// In your component.ts:
+statusOptions = [
+  { value: 'active', content: 'Active' },
+  { value: 'inactive', content: 'Inactive' }
+];
+```
+```html
+<!-- In your component.html: -->
+<lib-select label="Status" [options]="statusOptions" [selectedOption]="currentStatus" (selectedOptionChange)="currentStatus = $event" />
+```
+
+### 5. Tabs (`<lib-tabs>`)
+A tabbed navigation component to switch between different views.
+
+**Attributes (Inputs):**
+- `tabs` (`string[]`): An array of tab names to display.
+- `activeTab` (`string`): The currently active tab name.
+
+**Events (Outputs):**
+- `onTabChange` (`EventEmitter<string>`): Emitted with the name of the newly selected tab.
+
+**Usage Example:**
+```html
+<lib-tabs [tabs]="['Details', 'Comments', 'Audit History']" activeTab="Details" (onTabChange)="currentTab = $event" />
+```
+
+---
+
+## Current Implementation Status
+
 ### 🛠️ 1. Elementos Base (Core)
 
 - [x] **Botón (`ui-button`)**
