@@ -9,6 +9,7 @@ import {
   SwitchComponent,
   FormComponent,
   TableComponent,
+  PaginationComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -24,6 +25,7 @@ import {
     SwitchComponent,
     FormComponent,
     TableComponent,
+    PaginationComponent,
   ],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
@@ -38,6 +40,8 @@ export class WelcomeComponent {
     { id: 1, name: 'Alice', role: 'Admin' },
     { id: 2, name: 'Bob', role: 'User' },
   ];
+  
+  currentPage: number = 1;
   carsOptions = [
     { value: 'bwm', content: 'BMW' },
     { value: 'nissan', content: 'Nissan' },

@@ -4,21 +4,13 @@
     <div class="">
       <p class="text-xl text-center p-2">Where would you like to go?</p>
       <div class="flex gap-4 pt-2">
-        <a
-          routerLink="/reference-data"
-          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl"
-          >Reference Data</a
-        >
-        <a
-          routerLink="/policies"
-          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl"
-          >Policies</a
-        >
-        <a
-          routerLink="/claims"
-          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl"
-          >Claims</a
-        >
+        <a routerLink="/reference-data"
+          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl">Reference
+          Data</a>
+        <a routerLink="/policies"
+          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl">Policies</a>
+        <a routerLink="/claims"
+          class="p-5 bg-gray-300 rounded-lg text-lg shadow-md transition-all duration-150 hover:-translate-y-1 hover:shadow-xl">Claims</a>
       </div>
       <div class="bg-pink-100">
         <p>PRUEBA DE COMPONENTES, <b>BORRAR</b></p>
@@ -33,17 +25,8 @@
         <div class="p-8 min-fit">
           <lib-input label="Prueba" placeholder="prueba1" />
           <lib-input label="Hola" />
-          <lib-select
-            id="select"
-            name="select_type"
-            label="Selecciona un tipo"
-            [options]="carsOptions"
-          />
-          <lib-datepicker
-            label="Claim date"
-            [(selectedDate)]="claimDate"
-            [maxDate]="today"
-          />
+          <lib-select id="select" name="select_type" label="Selecciona un tipo" [options]="carsOptions" />
+          <lib-datepicker label="Claim date" [(selectedDate)]="claimDate" [maxDate]="today" />
           <div class="mt-4">
             <lib-switch label="Toggle Active Filter" />
           </div>
@@ -56,11 +39,11 @@
               <lib-button type="cancel" />
               <lib-button type="submit" />
             </div>
+            <lib-table [columns]="testTableCols" [data]="testTableData" />
           </lib-form>
-          
-          <lib-table [columns]="testTableCols" [data]="testTableData" />
+
+          <lib-pagination [currentPage]="currentPage" [totalPages]="5" (pageChange)="currentPage = $event" />
         </div>
       </div>
     </div>
   </div>
-</div>

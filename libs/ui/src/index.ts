@@ -6,3 +6,4 @@ export * from './lib/datepicker/datepicker.component';
 export * from './lib/switch/switch.component';
 export * from './lib/form/form.component';
 export * from './lib/table/table.component';
+export * from './lib/pagination/pagination.component';

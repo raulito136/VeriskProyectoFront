@@ -168,6 +168,25 @@ data = [
 <lib-table [columns]="cols" [data]="data" (rowClick)="onRowSelect($event)" />
 ```
 
+### 9. Pagination (`<lib-pagination>`)
+A navigation component to handle pagination across multiple pages of data.
+
+**Attributes (Inputs):**
+- `currentPage` (`number`): The currently active page (1-indexed). Default is `1`.
+- `totalPages` (`number`): The total number of available pages. Default is `1`.
+
+**Events (Outputs):**
+- `pageChange` (`EventEmitter<number>`): Emitted with the new page number when the user navigates.
+
+**Usage Example:**
+```html
+<lib-pagination 
+  [currentPage]="currentPage" 
+  [totalPages]="totalPages" 
+  (pageChange)="currentPage = $event">
+</lib-pagination>
+```
+
 ---
 
 ## Current Implementation Status
@@ -196,7 +215,7 @@ data = [
 
 - [x] **Tabla de Datos (`ui-table`)**
   - _Uso:_ Componente base para mostrar las listas de datos (Reference Data, Policies, Claims).
-- [ ] **Paginador (`ui-pagination`)**
+- [x] **Paginador (`ui-pagination`)**
   - _Uso:_ Controles de "Anterior", "Siguiente" y números de página, requerido explícitamente para las tablas de `mfe-policies` y `mfe-claims`.
 - [ ] **Tarjeta Configurables (`ui-card`)**
   - _Uso:_ Contenedor con sombra y bordes para agrupar visualmente la información en las vistas de detalle (`/:id`).
