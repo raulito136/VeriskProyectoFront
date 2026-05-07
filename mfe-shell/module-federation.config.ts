@@ -14,7 +14,7 @@ const config: ModuleFederationConfig = {
    * declare module 'my-external-remote';
    *
    */
-  remotes: [],
+  remotes: ['mfe-claims', 'mfe-reference-data'],
 };
 
 export default config;
