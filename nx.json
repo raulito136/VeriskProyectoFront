@@ -20,7 +20,6 @@
       "{workspaceRoot}/.github/workflows/ci.yml"
     ]
   },
-  "nxCloudId": "69f3107f4eb20dc5c2a2abcd",
   "targetDefaults": {
     "@angular-devkit/build-angular:browser": {
       "cache": true,
