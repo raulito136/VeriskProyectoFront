@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { CoverageType } from '../models/coverage-type.model';
-import { ApiResponse, PagedResponse } from '../models/api-response.model';
+import { ApiResponse, PagedResponse } from '../../../../shared-models/src/lib/shared-models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
