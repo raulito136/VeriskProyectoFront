@@ -1,1 +1,61 @@
-<p>policy-list works!</p>
+<div class="p-6 max-w-7xl mx-auto">
+  <div class="flex justify-between items-center mb-6">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-800">Policies</h1>
+      <p class="text-slate-500 mt-1">Manage policies and coverage details.</p>
+    </div>
+    <lib-button type="confirm" content="New Policy" (buttonClick)="onCreate()" />
+  </div>
+
+  @if (errorMessages.length > 0) {
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+      <h3 class="text-red-800 font-semibold mb-2">Error</h3>
+      <ul class="list-disc pl-5 text-red-700">
+        @for (msg of errorMessages; track msg) {
+          <li>{{ msg }}</li>
+        }
+      </ul>
+    </div>
+  }
+
+  <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-4 items-end">
+    <div class="w-48">
+      <lib-select 
+        label="Filter by Status" 
+        [options]="statusOptions" 
+        [selectedOption]="selectedStatus" 
+        (selectedOptionChange)="selectedStatus = $event.toString(); onFilterChange()">
+      </lib-select>
+    </div>
+    <div class="w-48">
+      <lib-select 
+        label="Filter by Type" 
+        [options]="policyTypeOptions" 
+        [selectedOption]="selectedPolicyTypeCode" 
+        (selectedOptionChange)="selectedPolicyTypeCode = $event.toString(); onFilterChange()">
+      </lib-select>
+    </div>
+  </div>
+
+  @if (isLoading) {
+    <div class="py-12 flex justify-center">
+      <lib-loader text="Loading policies..." />
+    </div>
+  } @else {
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+      <lib-table 
+        [columns]="columns" 
+        [data]="policies" 
+        (rowClick)="onRowSelect($event)">
+      </lib-table>
+      
+      <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+        <lib-pagination 
+          [currentPage]="currentPage" 
+          [totalPages]="totalPages" 
+          (pageChange)="onPageChange($event)">
+        </lib-pagination>
+      </div>
+    </div>
+  }
+</div>

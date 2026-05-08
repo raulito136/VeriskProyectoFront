@@ -1,1 +1,87 @@
-<p>policy-detail works!</p>
+<div class="p-6 max-w-5xl mx-auto">
+  <div class="mb-6">
+    <button (click)="onBack()" class="text-slate-500 hover:text-slate-800 flex items-center gap-1 mb-4 text-sm font-medium transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      Back to List
+    </button>
+  </div>
+
+  @if (errorMessages.length > 0) {
+    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+      <h3 class="text-red-800 font-semibold mb-2">Error</h3>
+      <ul class="list-disc pl-5 text-red-700">
+        @for (msg of errorMessages; track msg) {
+          <li>{{ msg }}</li>
+        }
+      </ul>
+    </div>
+  }
+
+  @if (isLoading) {
+    <div class="py-12 flex justify-center">
+      <lib-loader text="Loading policy details..." />
+    </div>
+  } @else if (policy) {
+    <div class="space-y-6">
+      <lib-card>
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <div class="flex items-center gap-3">
+              <h1 class="text-2xl font-bold text-slate-800">{{ policy.policyNumber }}</h1>
+              <span class="px-3 py-1 rounded-full text-xs font-semibold"
+                [ngClass]="{
+                  'bg-emerald-100 text-emerald-800': policy.status === 'ACTIVE',
+                  'bg-slate-100 text-slate-800': policy.status === 'INACTIVE',
+                  'bg-amber-100 text-amber-800': policy.status === 'EXPIRED',
+                  'bg-red-100 text-red-800': policy.status === 'CANCELLED'
+                }">
+                {{ policy.status }}
+              </span>
+            </div>
+            <p class="text-slate-500 mt-1">ID: {{ policy.id }}</p>
+          </div>
+          <div class="flex gap-2">
+            <lib-button type="default" content="View Policy Holder" (buttonClick)="onViewHolder()" />
+            <lib-button type="default" content="Edit Policy" (buttonClick)="onEdit()" />
+          </div>
+        </div>
+        
+        <h3 class="text-lg font-semibold text-slate-800 mb-4 border-b border-slate-100 pb-2">Coverage Details</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm mb-8">
+          <div>
+            <span class="block text-slate-500 font-medium mb-1">Policy Type</span>
+            <span class="text-slate-800">{{ policy.policyTypeCode }}</span>
+          </div>
+          <div>
+            <span class="block text-slate-500 font-medium mb-1">Coverage Type</span>
+            <span class="text-slate-800">{{ policy.coverageTypeCode }}</span>
+          </div>
+          <div>
+            <span class="block text-slate-500 font-medium mb-1">Coverage Amount</span>
+            <span class="text-slate-800 font-semibold">{{ policy.coverageAmount | currency:'USD' }}</span>
+          </div>
+          <div>
+            <span class="block text-slate-500 font-medium mb-1">Premium Amount</span>
+            <span class="text-slate-800 font-semibold">{{ policy.premiumAmount | currency:'USD' }}</span>
+          </div>
+        </div>
+
+        <h3 class="text-lg font-semibold text-slate-800 mb-4 border-b border-slate-100 pb-2">Term</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm mb-4">
+          <div>
+            <span class="block text-slate-500 font-medium mb-1">Start Date</span>
+            <span class="text-slate-800">{{ policy.startDate }}</span>
+          </div>
+          <div>
+            <span class="block text-slate-500 font-medium mb-1">End Date</span>
+            <span class="text-slate-800">{{ policy.endDate }}</span>
+          </div>
+        </div>
+        
+        <div class="text-xs text-slate-400 mt-8 text-right">
+          Last Updated: {{ policy.updatedAt | date:'medium' }}
+        </div>
+      </lib-card>
+    </div>
+  }
+</div>
