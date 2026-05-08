@@ -2,7 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ClaimService {
   constructor(private http: HttpClient) {}
   // Conexión directa a tu Claims.Api (que corre en el 5001)

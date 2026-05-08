@@ -2,7 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ClaimCommentService {
   constructor(private http: HttpClient) {}
   private apiUrl = 'http://localhost:5001/api/v1/claims';
