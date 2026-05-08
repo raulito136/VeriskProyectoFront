@@ -1,0 +1,36 @@
+<div class="p-8 max-w-4xl mx-auto">
+  <form [formGroup]="claimForm" (ngSubmit)="guardarDatos()">
+    
+    <!-- Tu lib-form nos da la caja con título -->
+    <lib-form title="Register a Claim" subtitle="Enter the details to submit for evaluation">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <lib-input label="Policy Number" placeholder="Ex: POL-2026-001" 
+                   [value]="claimForm.get('policyNumber')?.value || ''" 
+                   (valueChange)="claimForm.get('policyNumber')?.setValue($event)"></lib-input>
+        
+        <!-- We parse the value back to number for the backend -->
+        <lib-input label="Claim Amount ($)" placeholder="Ex: 5000" type="number"
+                   [value]="claimForm.get('amount')?.value || ''" 
+                   (valueChange)="claimForm.get('amount')?.setValue($event)"></lib-input>
+        
+        <lib-datepicker label="Incident Date" 
+                        [selectedDate]="claimForm.get('claimDate')?.value || ''" 
+                        (selectedDateChange)="claimForm.get('claimDate')?.setValue($event)"></lib-datepicker>
+      </div>
+
+      <div class="mt-4">
+        <lib-input label="Incident Description" placeholder="Describe what happened" 
+                   [value]="claimForm.get('description')?.value || ''" 
+                   (valueChange)="claimForm.get('description')?.setValue($event)"></lib-input>
+      </div>
+
+      <!-- El slot form-actions de tu lib-form -->
+      <div form-actions class="flex gap-2 justify-end">
+        <lib-button type="cancel" content="Cancel" (buttonClick)="cancelar()"></lib-button>
+        <lib-button type="submit" content="Save Claim" (buttonClick)="guardarDatos()"></lib-button>
+      </div>
+
+    </lib-form>
+  </form>
+</div>
