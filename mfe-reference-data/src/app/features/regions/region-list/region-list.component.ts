@@ -9,8 +9,7 @@ import { SwitchComponent } from 'libs/ui/src/lib/switch/switch.component';
     selector: 'app-region-list',
     imports: [CommonModule, RouterLink, SwitchComponent],
     templateUrl: './region-list.component.html',
-    styleUrl: './region-list.component.css'
-})
+    styleUrl: './region-list.component.css'})
 export class RegionListComponent {
   private status=false;
   private regionService=inject(RegionService);

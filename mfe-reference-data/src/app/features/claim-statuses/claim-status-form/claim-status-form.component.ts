@@ -59,7 +59,8 @@ export class ClaimStatusFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/reference-data/claim-statuses']);
+    const path = this.isEditMode ? '../../' : '../';
+    this.router.navigate([path], { relativeTo: this.route });
   }
 
   onSubmitForm(event: Event) {
@@ -68,7 +69,6 @@ export class ClaimStatusFormComponent implements OnInit {
   const formValues = this.myForm.getRawValue();
 
   if (!this.isEditMode) {
-    // 1. MODO CREAR: Construimos el objeto igual a CreateClaimStatusRequest (C#)
     const createPayload = {
       code: formValues.code ?? '',
       name: formValues.name ?? '',
@@ -78,13 +78,12 @@ export class ClaimStatusFormComponent implements OnInit {
     this.claimService.createClaimStatus(createPayload as any).subscribe({
       next: (res) => {
         console.log('Creado:', res);
-        this.router.navigate(['/reference-data/claim-statuses']);
+    this.router.navigate(['../'], { relativeTo: this.route });
       },
       error: (err) => console.error(err)
     });
 
   } else {
-    // 2. MODO EDITAR: Construimos el objeto igual a UpdateClaimStatusRequest (C#)
     const updatePayload = {
       name: formValues.name ?? '',
       description: formValues.description ?? '',
@@ -94,7 +93,7 @@ export class ClaimStatusFormComponent implements OnInit {
     this.claimService.updateClaimStatus(formValues.id!, updatePayload as any).subscribe({
       next: (res) => {
         console.log('Actualizado:', res);
-        this.router.navigate(['/reference-data/claim-statuses']);
+        this.router.navigate(['../../'], { relativeTo: this.route });
       },
       error: (err) => console.error(err)
     });
