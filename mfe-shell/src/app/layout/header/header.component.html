@@ -11,46 +11,37 @@
       <ul class="flex gap-8">
         <!-- REFERENCE DATA -->
         <li class="group relative">
-          <a
-            routerLink="/reference-data"
-            class="hover:text-blue-200 transition-colors"
-            >Reference Data ▾</a
-          >
+          <a routerLink="/reference-data" class="hover:text-blue-200 transition-colors">Reference Data ▾</a>
         </li>
 
         <!-- POLICIES -->
         <li class="group relative">
-          <a
-            routerLink="/policies"
-            class="block hover:text-blue-200 transition-colors"
-            >Policies ▾</a
-          >
+          <a routerLink="/policies" class="block hover:text-blue-200 transition-colors">Policies ▾</a>
           <ul
-            class="absolute left-0 top-full hidden w-52 bg-blue-700 shadow-lg group-hover:block list-none p-0 m-0 rounded-md"
-          >
+            class="absolute left-0 top-full hidden w-52 bg-blue-700 shadow-lg group-hover:block list-none p-0 m-0 rounded-md">
             <li>
-              <a
-                routerLink="/policies"
-                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors"
-                >Policies</a
-              >
+              <a routerLink="/policies"
+                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors">Policies</a>
             </li>
             <li>
-              <a
-                routerLink="/policy-holders"
-                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors"
-                >Policy Holders</a
-              >
+              <a routerLink="/policy-holders"
+                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors">Policy Holders</a>
             </li>
           </ul>
         </li>
 
         <!-- CLAIMS -->
-        <li>
-          <a routerLink="/claims" class="hover:text-blue-200 transition-colors"
-            >Claims ▾</a
-          >
+        <li class="group relative">
+          <a routerLink="/claim" class="hover:text-blue-200 transition-colors">Claims ▾</a>
+          <ul
+            class="absolute left-0 top-full hidden w-42 bg-blue-700 shadow-lg group-hover:block list-none p-0 m-0 rounded-md">
+            <li>
+              <a routerLink="/claims"
+                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors">Claims</a>
+            </li>
+          </ul>
         </li>
+
       </ul>
     </nav>
   </div>

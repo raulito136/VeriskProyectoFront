@@ -1,15 +1,12 @@
 <div class="p-8">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-3xl font-extrabold text-gray-800">Claims</h1>
-    
-    <!-- Usamos tu lib-button con un routerLink -->
+
     <lib-button type="submit" content="Create New Claim" routerLink="new"></lib-button>
   </div>
 
-  <!-- Usamos tu lib-loader mientras carga -->
   <lib-loader *ngIf="loading()" text="Loading claims..."></lib-loader>
 
-  <!-- Usamos tu lib-table pasándole las columnas, la data y el evento de clic -->
   <lib-table *ngIf="!loading()" [columns]="tableColumns" [data]="claimsList()" (rowClick)="irAlDetalle($event)">
   </lib-table>
 </div>
