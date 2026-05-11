@@ -75,7 +75,7 @@ export class PolicyTypeFormComponent implements OnInit {
       this.policyService.updatePolicyType(formValue.id!, updateData as any).subscribe({
         next:(res)=>{
           console.log("Actualizado: ", res);
-          this.router.navigate(['/reference-data/policy-types']);
+          this.router.navigate(['../../'], { relativeTo: this.route });
         },
         error:(err)=>{
           console.error('Error updating policy type:', err);
@@ -92,7 +92,7 @@ export class PolicyTypeFormComponent implements OnInit {
       this.policyService.createPolicyType(createData as any).subscribe({
         next:(res)=>{
           console.log("Creado: ", res);
-          this.router.navigate(['/reference-data/policy-types']);
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
         error:(err)=>{
           console.error('Error creating policy type:', err);
@@ -101,9 +101,11 @@ export class PolicyTypeFormComponent implements OnInit {
     }
   }
 
-  onCancel(){
-    this.router.navigate(['/reference-data/policy-types']);
+  onCancel() {
+    const path = this.isEditMode ? '../../' : '../';
+    this.router.navigate([path], { relativeTo: this.route });
   }
+
 
   
 }

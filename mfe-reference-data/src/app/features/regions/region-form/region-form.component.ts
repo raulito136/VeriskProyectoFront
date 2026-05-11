@@ -68,7 +68,7 @@ export class RegionFormComponent implements OnInit {
       this.regionService.updateRegion(formValue.id!, updateData as any).subscribe({
         next:(res)=>{
           console.log('Region updated successfully:', res);
-          this.router.navigate(['/reference-data/regions']);
+          this.router.navigate(['../../'], { relativeTo: this.route });
         },
         error:(err)=>{
           console.error('Error updating region:', err);
@@ -78,12 +78,12 @@ export class RegionFormComponent implements OnInit {
       const createData={
         code: formValue.code,
         name: formValue.name 
-    }
+      };
 
       this.regionService.createRegion(createData as any).subscribe({
         next:(res)=>{
           console.log('Region created successfully:', res);
-          this.router.navigate(['/regions']);
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
         error:(err)=>{
           console.error('Error creating region:', err);
@@ -91,6 +91,9 @@ export class RegionFormComponent implements OnInit {
       });
   }
 }
-  onCancel(){
-this.router.navigate(['/reference-data/regions']);  }
+    onCancel() {
+    const path = this.isEditMode ? '../../' : '../';
+    this.router.navigate([path], { relativeTo: this.route });
+  }
+
 }

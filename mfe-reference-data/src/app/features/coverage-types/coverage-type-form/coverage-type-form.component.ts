@@ -71,7 +71,7 @@ export class CoverageTypeFormComponent implements OnInit {
       this.coverageService.createCoverageType(createData as any).subscribe({
         next:(res)=>{
           console.log("Creado: ", res);
-          this.router.navigate(['/reference-data/coverage-types']);
+          this.router.navigate(['../'], { relativeTo: this.route });
         },
         error:(err)=>{
           console.error('Error creating coverage type:', err);
@@ -87,7 +87,7 @@ export class CoverageTypeFormComponent implements OnInit {
       this.coverageService.updateCoverageType(formValue.id!, updateData as any).subscribe({
         next:(res)=>{
           console.log("Actualizado: ", res);
-          this.router.navigate(['/reference-data/coverage-types']);
+          this.router.navigate(['../../'], { relativeTo: this.route });
         },
         error:(err)=>{
           console.error('Error updating coverage type:', err);
@@ -96,7 +96,9 @@ export class CoverageTypeFormComponent implements OnInit {
     }
   }
 
-  onCancel(){
-    this.router.navigate(['/reference-data/coverage-types']);
+    onCancel() {
+    const path = this.isEditMode ? '../../' : '../';
+    this.router.navigate([path], { relativeTo: this.route });
   }
+
 }
