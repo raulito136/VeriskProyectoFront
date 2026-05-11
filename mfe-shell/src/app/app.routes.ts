@@ -4,14 +4,14 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 export const appRoutes: Route[] = [
   {
-    path: 'claims',
-    loadChildren: () =>
-      loadRemoteModule('mfe-claims', './Routes').then((m) => m.remoteRoutes),
-  },
-  {
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full', // URL must be EMPTY
+  },
+  {
+    path: 'claims',
+    loadChildren: () =>
+      loadRemoteModule('mfe-claims', './Routes').then((m) => m.remoteRoutes),
   },
   {
     path: 'policies',
@@ -21,7 +21,9 @@ export const appRoutes: Route[] = [
   {
     path: 'policy-holders',
     loadChildren: () =>
-      loadRemoteModule('mfe-policies', './Routes').then((m) => m.policyHolderRoutes),
+      loadRemoteModule('mfe-policies', './Routes').then(
+        (m) => m.policyHolderRoutes
+      ),
   },
   {
     path: 'reference-data',

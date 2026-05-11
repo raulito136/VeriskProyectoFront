@@ -72,4 +72,27 @@ export class PolicyDetailComponent implements OnInit {
       this.router.navigate(['/policy-holders', this.policy.policyHolderId]);
     }
   }
+
+  onDelete(id: number): void {
+    const confirmDelete = confirm(
+      'Are you sure you want to delete this policy? This action can not be undone.'
+    );
+
+    if (confirmDelete) {
+      this.isLoading = true;
+
+      this.service.deletePolicy(id).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/policies']);
+        },
+        error: (err) => {
+          this.errorMessage =
+            err.error?.errors?.map((e: any) => e.message).join(', ') ||
+            'Error during policy remove.';
+          this.isLoading = false;
+        },
+      });
+    }
+  }
 }
