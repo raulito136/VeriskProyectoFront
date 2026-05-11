@@ -3,12 +3,25 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PolicyHolderService } from '../../../services/policy-holder.service';
 import { PolicyHolder } from '../../../models/policy-holder.model';
-import { TableComponent, PaginationComponent, ButtonComponent, LoaderComponent } from '@policy-system/ui';
+import {
+  TableComponent,
+  PaginationComponent,
+  ButtonComponent,
+  LoaderComponent,
+  InlineErrorComponent,
+} from '@policy-system/ui';
 
 @Component({
   selector: 'app-policy-holder-list',
   standalone: true,
-  imports: [CommonModule, TableComponent, PaginationComponent, ButtonComponent, LoaderComponent],
+  imports: [
+    CommonModule,
+    TableComponent,
+    PaginationComponent,
+    ButtonComponent,
+    LoaderComponent,
+    InlineErrorComponent,
+  ],
   templateUrl: './policy-holder-list.component.html',
   styleUrl: './policy-holder-list.component.css',
 })
@@ -21,14 +34,14 @@ export class PolicyHolderListComponent implements OnInit {
   pageSize = 10;
   totalPages = 1;
   isLoading = false;
-  errorMessages: string[] = [];
+  errorMessage: string = '';
 
   columns = [
     { key: 'id', label: 'ID' },
     { key: 'firstName', label: 'First Name' },
     { key: 'lastName', label: 'Last Name' },
     { key: 'email', label: 'Email' },
-    { key: 'regionCode', label: 'Region' }
+    { key: 'regionCode', label: 'Region' },
   ];
 
   ngOnInit(): void {
@@ -37,7 +50,7 @@ export class PolicyHolderListComponent implements OnInit {
 
   loadPolicyHolders(page: number = 1): void {
     this.isLoading = true;
-    this.errorMessages = [];
+    this.errorMessage = '';
     this.service.getPolicyHolders(page, this.pageSize).subscribe({
       next: (response) => {
         this.policyHolders = response.data;
@@ -46,9 +59,11 @@ export class PolicyHolderListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessages = err.error?.errors?.map((e: any) => e.message) || ['Failed to load policy holders.'];
+        this.errorMessage = err.error?.errors?.map((e: any) => e.message) || [
+          'Failed to load policy holders.',
+        ];
         this.isLoading = false;
-      }
+      },
     });
   }
 
