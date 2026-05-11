@@ -1,7 +1,14 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
-  <h1 class="text-2xl font-bold text-slate-800 mb-6 border-b pb-2">
-    Claim Statuses
-  </h1>
+  <div class="flex justify-between items-center mb-6 border-b pb-2">
+    <h1 class="text-2xl font-bold text-slate-800">
+      Claim Statuses
+    </h1>
+    <lib-switch
+      label="Mostrar Inactivos"
+      [checked]="showAll()"
+      (checkedChange)="onShowAllChange($event)">
+    </lib-switch>
+  </div>
 
   @if (errores().length > 0) {
   <div class="mb-6 p-4 border-l-4 border-red-500 bg-red-50 rounded-r-lg">

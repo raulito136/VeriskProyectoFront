@@ -10,8 +10,8 @@ export class RegionService {
   private http=inject(HttpClient);
   private apiUrl="http://localhost:5003/api/v1/regions";
 
-  getRegions(){
-    return this.http.get<PagedResponse<Region>>(this.apiUrl);
+  getRegions(includeInactive: boolean = false){
+    return this.http.get<PagedResponse<Region>>(`${this.apiUrl}?includeInactive=${includeInactive}`);
   }
 
   getRegionsById(id:number){

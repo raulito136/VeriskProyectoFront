@@ -1,6 +1,8 @@
 <button
+  [type]="type === 'submit' ? 'submit' : 'button'"
+  [disabled]="disabled"
   [className]="baseClasses + ' ' + colorClasses"
-  (click)="buttonClick.emit()"
+  (click)="!disabled && buttonClick.emit()"
 >
   {{ contentText }}
 </button>

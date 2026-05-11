@@ -3,20 +3,21 @@ import { CommonModule } from '@angular/common';
 import { ClaimStatusService } from 'mfe-reference-data/src/app/services/claim-status.service';
 import { ClaimStatus } from 'mfe-reference-data/src/app/models/claim-status.model';
 import { RouterLink } from '@angular/router';
+import { SwitchComponent } from 'libs/ui/src/lib/switch/switch.component';
 
 @Component({
     selector: 'app-claim-status-list',
-    imports: [CommonModule, RouterLink
-    ],
+    imports: [CommonModule, RouterLink, SwitchComponent],
     templateUrl: './claim-status-list.component.html',
     styleUrl: './claim-status-list.component.css'
 })
 export class ClaimStatusListComponent {
-  errores= signal<string[]>([]);
-  private status=false;
-  private claimService=inject(ClaimStatusService);
+  errores = signal<string[]>([]);
+  showAll = signal<boolean>(false);
+  
+  private claimService = inject(ClaimStatusService);
 
-  claimsStatuses= signal<ClaimStatus[]>([]);
+  claimsStatuses = signal<ClaimStatus[]>([]);
 
   ngOnInit(){
     this.loadAll();
@@ -24,7 +25,7 @@ export class ClaimStatusListComponent {
 
   loadAll(){
     this.errores.set([]);
-    this.claimService.getClaimStatuses().subscribe({
+    this.claimService.getClaimStatuses(this.showAll()).subscribe({
       next:(apiResponse)=>{
         this.claimsStatuses.set(apiResponse.data);
       },
@@ -32,6 +33,12 @@ export class ClaimStatusListComponent {
         this.errores.set([err]);
       }
     })
+  }
+
+  onShowAllChange(value: boolean) {
+    console.log('Switch cambiado a:', value, 'haciendo llamada a la API...');
+    this.showAll.set(value);
+    this.loadAll();
   }
 
   delete(id:number){
@@ -44,9 +51,5 @@ export class ClaimStatusListComponent {
         this.errores.set([err]);
       }
     })
-  }
-  
-  changeStatus(){
-    this.status=!this.status;
   }
 }

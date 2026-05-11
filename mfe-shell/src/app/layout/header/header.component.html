@@ -11,7 +11,42 @@
       <ul class="flex gap-8">
         <!-- REFERENCE DATA -->
         <li class="group relative">
-          <a routerLink="/reference-data" class="hover:text-blue-200 transition-colors">Reference Data ▾</a>
+          <a
+            routerLink="/reference-data"
+            class="hover:text-blue-200 transition-colors"
+            >Reference Data ▾</a>
+            <ul
+            class="absolute left-0 top-full hidden w-60 bg-blue-700 shadow-lg group-hover:block list-none p-0 m-0 rounded-md z-50"
+          >
+            <li>
+              <a
+                routerLink="/mfe-reference-data/claim-statuses"
+                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors"
+                >Claim Statuses</a
+              >
+            </li>
+            <li>
+              <a
+                routerLink="/mfe-reference-data/policy-types"
+                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors"
+                >Policy Types</a
+              >
+            </li>
+            <li>
+              <a
+                routerLink="/mfe-reference-data/coverage-types"
+                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors"
+                >Coverage Types</a
+              >
+            </li>
+            <li>
+              <a
+                routerLink="/mfe-reference-data/regions"
+                class="block px-4 py-3 hover:bg-blue-500 hover:rounded-md transition-colors"
+                >Regions</a
+              >
+            </li>
+          </ul>
         </li>
 
         <!-- POLICIES -->
