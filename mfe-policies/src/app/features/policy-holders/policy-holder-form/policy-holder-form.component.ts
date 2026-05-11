@@ -37,7 +37,7 @@ export class PolicyHolderFormComponent implements OnInit {
   isSaving = false;
   
   regionOptions: { value: string, content: string }[] = [];
-  globalErrorMessages: string[] = [];
+  globalErrorMessages: string = '';
 
   ngOnInit(): void {
     this.initForm();
@@ -81,7 +81,7 @@ export class PolicyHolderFormComponent implements OnInit {
         this.isLoading = false;
       },
       error: () => {
-        this.globalErrorMessages = ['Failed to load policy holder details.'];
+        this.globalErrorMessages = 'Failed to load policy holder details.';
         this.isLoading = false;
       }
     });
@@ -112,7 +112,7 @@ export class PolicyHolderFormComponent implements OnInit {
     }
 
     this.isSaving = true;
-    this.globalErrorMessages = [];
+    this.globalErrorMessages = '';
     const request = this.form.value;
 
     const requestObservable = this.isEditMode && this.policyHolderId

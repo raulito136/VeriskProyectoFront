@@ -7,14 +7,7 @@
   </div>
 
   @if (globalErrorMessages.length > 0) {
-    <div class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-      <h3 class="text-red-800 font-semibold mb-2">Error Saving</h3>
-      <ul class="list-disc pl-5 text-red-700">
-        @for (msg of globalErrorMessages; track msg) {
-          <li>{{ msg }}</li>
-        }
-      </ul>
-    </div>
+    <lib-inline-error [message]="globalErrorMessages" />
   }
 
   @if (isLoading) {
@@ -95,7 +88,7 @@
         </div>
       </div>
 
-      <div form-actions>
+      <div form-actions class="flex gap-2">
         <lib-button type="cancel" content="Cancel" (buttonClick)="onCancel()" />
         <lib-button type="submit" [content]="isSaving ? 'Saving...' : 'Save Policy Holder'" />
       </div>

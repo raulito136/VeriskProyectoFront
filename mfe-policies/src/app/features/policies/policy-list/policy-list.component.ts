@@ -4,12 +4,12 @@ import { Router } from '@angular/router';
 import { PolicyService } from '../../../services/policy.service';
 import { ReferenceDataService } from '../../../services/reference-data.service';
 import { Policy } from '../../../models/policy.model';
-import { TableComponent, PaginationComponent, ButtonComponent, LoaderComponent, SelectComponent } from '@policy-system/ui';
+import { TableComponent, PaginationComponent, ButtonComponent, LoaderComponent, SelectComponent, InlineErrorComponent } from '@policy-system/ui';
 
 @Component({
   selector: 'app-policy-list',
   standalone: true,
-  imports: [CommonModule, TableComponent, PaginationComponent, ButtonComponent, LoaderComponent, SelectComponent],
+  imports: [CommonModule, TableComponent, PaginationComponent, ButtonComponent, LoaderComponent, SelectComponent, InlineErrorComponent],
   templateUrl: './policy-list.component.html',
   styleUrl: './policy-list.component.css',
 })
@@ -23,21 +23,21 @@ export class PolicyListComponent implements OnInit {
   pageSize = 10;
   totalPages = 1;
   isLoading = false;
-  errorMessages: string[] = [];
+  errorMessage: string = '';
 
   // Filters
-  selectedStatus = '';
-  selectedPolicyTypeCode = '';
+  selectedStatus = 'ALL';
+  selectedPolicyTypeCode = 'ALL';
   
   statusOptions = [
-    { value: '', content: 'All Statuses' },
+    { value: 'ALL', content: 'All Statuses' },
     { value: 'ACTIVE', content: 'Active' },
     { value: 'INACTIVE', content: 'Inactive' },
     { value: 'EXPIRED', content: 'Expired' },
     { value: 'CANCELLED', content: 'Cancelled' }
   ];
 
-  policyTypeOptions: { value: string, content: string }[] = [{ value: '', content: 'All Types' }];
+  policyTypeOptions: { value: string, content: string }[] = [{ value: 'ALL', content: 'All Types' }];
 
   columns = [
     { key: 'policyNumber', label: 'Policy Number' },
@@ -56,7 +56,7 @@ export class PolicyListComponent implements OnInit {
   loadPolicyTypes(): void {
     this.refDataService.getPolicyTypes().subscribe(types => {
       this.policyTypeOptions = [
-        { value: '', content: 'All Types' },
+        { value: 'ALL', content: 'All Types' },
         ...types.map(t => ({ value: t.code, content: t.name }))
       ];
     });
@@ -64,10 +64,10 @@ export class PolicyListComponent implements OnInit {
 
   loadPolicies(page: number = 1): void {
     this.isLoading = true;
-    this.errorMessages = [];
+    this.errorMessage = '';
     
-    const statusParam = this.selectedStatus === '' ? undefined : this.selectedStatus;
-    const typeParam = this.selectedPolicyTypeCode === '' ? undefined : this.selectedPolicyTypeCode;
+    const statusParam = this.selectedStatus === 'ALL' || this.selectedStatus === '' ? undefined : this.selectedStatus;
+    const typeParam = this.selectedPolicyTypeCode === 'ALL' || this.selectedPolicyTypeCode === '' ? undefined : this.selectedPolicyTypeCode;
 
     this.service.getPolicies(page, this.pageSize, statusParam, typeParam).subscribe({
       next: (response) => {
@@ -77,7 +77,7 @@ export class PolicyListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessages = err.error?.errors?.map((e: any) => e.message) || ['Failed to load policies.'];
+        this.errorMessage = err.error?.errors?.map((e: any) => e.message) || ['Failed to load policies.'];
         this.isLoading = false;
       }
     });
@@ -95,7 +95,11 @@ export class PolicyListComponent implements OnInit {
     this.router.navigate(['/policies', row.id]);
   }
 
-  onCreate(): void {
+  goToPolicyCreation(): void {
     this.router.navigate(['/policies/new']);
+  }
+
+  goToPolicyHolderCreation(): void {
+    this.router.navigate(['/policy-holders/new']);
   }
 }
