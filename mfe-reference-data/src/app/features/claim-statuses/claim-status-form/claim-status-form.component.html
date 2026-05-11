@@ -1,9 +1,20 @@
 <lib-form [title]="isEditMode ? 'Editar Claim Status' : 'Crear Claim Status'" (formSubmit)="onSubmitForm($event)">
   
   <div [formGroup]="myForm" class="flex flex-col gap-4">
-    <lib-input formControlName="code" label="Código (ej: OPEN)"></lib-input>
+    <ng-container *ngIf="!isEditMode">
+      <lib-input formControlName="code" label="Código (ej: OPEN)"></lib-input>
+    </ng-container>
+
     <lib-input formControlName="name" label="Nombre (ej: Abierto)"></lib-input>
     <lib-textarea formControlName="description" label="Descripción"></lib-textarea>
+
+    <ng-container *ngIf="isEditMode">
+      <lib-switch 
+        label="Estado Activo" 
+        [checked]="myForm.get('isActive')?.value ?? false" 
+        (checkedChange)="myForm.get('isActive')?.setValue($event)">
+      </lib-switch>
+    </ng-container>
   </div>
 
   <div form-actions class="flex gap-2 justify-end">

@@ -10,8 +10,8 @@ export class ClaimStatusService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:5003/api/v1/claim-statuses'; 
 
-  getClaimStatuses() {
-    return this.http.get<PagedResponse<ClaimStatus>>(this.apiUrl);
+  getClaimStatuses(includeInactive: boolean = false) {
+    return this.http.get<PagedResponse<ClaimStatus>>(`${this.apiUrl}?includeInactive=${includeInactive}`);
   }
 
   getClaimStatusById(id: number) {

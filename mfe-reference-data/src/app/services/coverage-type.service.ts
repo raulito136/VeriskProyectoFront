@@ -11,8 +11,8 @@ export class CoverageTypeService {
   private apiUrl = 'http://localhost:5003/api/v1/coverage-types';
   
   
-  getCoverageTypes(){
-    return this.http.get<PagedResponse<CoverageType>>(this.apiUrl);
+  getCoverageTypes(includeInactive: boolean = false){
+    return this.http.get<PagedResponse<CoverageType>>(`${this.apiUrl}?includeInactive=${includeInactive}`);
   }
 
   getCoverageTypeById(id:number){
