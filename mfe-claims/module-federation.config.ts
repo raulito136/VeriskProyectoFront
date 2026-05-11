@@ -1,7 +1,7 @@
-import { ModuleFederationConfig } from '@nx/webpack';
+import { ModuleFederationConfig } from '@nx/module-federation';
 
 const config: ModuleFederationConfig = {
-  name: 'mfe-claims',
+  name: 'claims',
   exposes: {
     './Routes': 'mfe-claims/src/app/remote-entry/entry.routes.ts',
   },

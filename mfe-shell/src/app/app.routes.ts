@@ -4,7 +4,7 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 export const appRoutes: Route[] = [
   {
-    path: 'mfe-claims',
+    path: 'claims',
     loadChildren: () =>
       loadRemoteModule('mfe-claims', './Routes').then((m) => m.remoteRoutes),
   },
