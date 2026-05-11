@@ -3,12 +3,25 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PolicyService } from '../../../services/policy.service';
 import { Policy } from '../../../models/policy.model';
-import { CardComponent, ButtonComponent, LoaderComponent } from '@policy-system/ui';
+import {
+  CardComponent,
+  ButtonComponent,
+  LoaderComponent,
+  InlineErrorComponent,
+} from '@policy-system/ui';
 
 @Component({
   selector: 'app-policy-detail',
   standalone: true,
-  imports: [CommonModule, CardComponent, ButtonComponent, LoaderComponent, CurrencyPipe, DatePipe],
+  imports: [
+    CommonModule,
+    CardComponent,
+    ButtonComponent,
+    LoaderComponent,
+    CurrencyPipe,
+    DatePipe,
+    InlineErrorComponent,
+  ],
   templateUrl: './policy-detail.component.html',
   styleUrl: './policy-detail.component.css',
 })
@@ -19,7 +32,7 @@ export class PolicyDetailComponent implements OnInit {
 
   policy?: Policy;
   isLoading = false;
-  errorMessages: string[] = [];
+  errorMessage: string = '';
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -36,9 +49,11 @@ export class PolicyDetailComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessages = err.error?.errors?.map((e: any) => e.message) || ['Failed to load details.'];
+        this.errorMessage = err.error?.errors?.map((e: any) => e.message) || [
+          'Failed to load details.',
+        ];
         this.isLoading = false;
-      }
+      },
     });
   }
 
