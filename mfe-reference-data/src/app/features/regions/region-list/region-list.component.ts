@@ -63,4 +63,22 @@ export class RegionListComponent {
     this.showAll.set(value);
     this.loadAll();
   }
+
+  toggle(policy: Region) {
+          if (policy.isActive) {
+            this.delete(policy.id);
+          } else {
+            this.errores.set([]);
+            this.regionService.activateRegion(policy.id).subscribe({
+              next: (apiResponse) => {
+                console.log("Region activated successfully:", apiResponse);
+                this.loadAll();
+              },
+              error: (err) => {
+                console.error("Error activating region:", err);
+                this.errores.set([err]);
+              }
+            });
+          }
+        }
 }

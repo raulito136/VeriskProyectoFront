@@ -33,4 +33,8 @@ export class ClaimStatusService {
   deleteClaimStatus(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  activateClaimStatus(id: number) {
+    return this.http.put<ApiResponse<ClaimStatus>>(`${this.apiUrl}/${id}/activate`, {});
+  }
 }

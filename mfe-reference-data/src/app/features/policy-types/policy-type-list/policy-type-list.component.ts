@@ -60,7 +60,26 @@ export class PolicyTypeListComponent {
       this.errores.set([err]);
     }
   });
+
 }
+
+  toggle(policy: PolicyType) {
+    if (policy.isActive) {
+      this.delete(policy.id);
+    } else {
+      this.errores.set([]);
+      this.policyService.activatePolicyType(policy.id).subscribe({
+        next: (apiResponse) => {
+          console.log("Policy Type activated successfully:", apiResponse);
+          this.loadAll();
+        },
+        error: (err) => {
+          console.error("Error activating policy type:", err);
+          this.errores.set([err]);
+        }
+      });
+    }
+  }
 
   onShowAllChange(value: boolean) {
     console.log('Switch cambiado a:', value, 'haciendo llamada a la API...');

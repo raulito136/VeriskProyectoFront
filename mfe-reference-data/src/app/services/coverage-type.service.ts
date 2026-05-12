@@ -34,4 +34,8 @@ export class CoverageTypeService {
   deleteCoverageType(id:number){
       return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  activateCoverageType(id: number) {
+    return this.http.put<ApiResponse<CoverageType>>(`${this.apiUrl}/${id}/activate`, {});
+  }
 }
