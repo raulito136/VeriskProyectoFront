@@ -28,6 +28,11 @@
     </button>
   </div>
 }
+  @if (loading()) {
+  <div class="py-12 flex justify-center">
+    <lib-loader text="Loading claim statuses..." />
+  </div>
+} @else {
   <div class="overflow-x-auto rounded-lg border border-slate-200">
     <table class="min-w-full divide-y divide-slate-200 bg-white">
       <thead class="bg-slate-50">
@@ -87,4 +92,5 @@
    Create new Claim Status
 </a>
 
+}
 </div>
