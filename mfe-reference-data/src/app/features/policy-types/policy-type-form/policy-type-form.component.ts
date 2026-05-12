@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PolicyTypeService } from 'mfe-reference-data/src/app/services/policy-type.service';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SwitchComponent } from 'libs/ui/src/lib/switch/switch.component';
 import { ButtonComponent } from 'libs/ui/src/lib/button/button.component';
 import { TextareaComponent } from 'libs/ui/src/lib/textarea/textarea.component';
@@ -26,8 +26,8 @@ export class PolicyTypeFormComponent implements OnInit {
 
   public myForm= this.fb.group({
     id: [null as number | null],
-    code:[''],
-    name:[''],
+    code:['', [Validators.required]],
+    name:['', [Validators.required]],
     description:[''],
     isActive:[true]
   });

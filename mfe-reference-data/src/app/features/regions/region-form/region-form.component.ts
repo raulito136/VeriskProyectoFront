@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RegionService } from 'mfe-reference-data/src/app/services/region.service';
 import { Region } from 'mfe-reference-data/src/app/models/region.model';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SwitchComponent } from 'libs/ui/src/lib/switch/switch.component';
 import { ButtonComponent } from 'libs/ui/src/lib/button/button.component';
@@ -26,8 +26,8 @@ export class RegionFormComponent implements OnInit {
 
   public myForm= this.fb.group({
     id: [null as number | null],
-    code:[''],
-    name:[''],
+    code:['', [Validators.required]],
+    name:['', [Validators.required]],
     isActive:[true]
   });
 
