@@ -28,6 +28,7 @@ export class CoverageTypeListComponent {
   }
 
   loadAll(){
+    this.errores.set([]);
     this.loading.set(true);
     this.coverageService.getCoverageTypes(this.showAll()).subscribe({
       next:(apiResponse)=>{
@@ -49,6 +50,7 @@ export class CoverageTypeListComponent {
   }
 
   delete(id:number){
+    this.errores.set([]);
     this.coverageService.deleteCoverageType(id).subscribe({
       next:(apiResponse)=>{
         console.log("Coverage Type deleted successfully:", apiResponse);

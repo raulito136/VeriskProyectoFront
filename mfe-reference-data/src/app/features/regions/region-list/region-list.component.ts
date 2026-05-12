@@ -26,6 +26,7 @@ export class RegionListComponent {
   }
 
   loadAll(){
+    this.errores.set([]);
     this.loading.set(true);
     this.regionService.getRegions(this.showAll()).subscribe({
       next:(apiResponse)=>{
@@ -41,6 +42,7 @@ export class RegionListComponent {
   }
 
   delete(id:number){
+    this.errores.set([]);
     this.regionService.deleteRegion(id).subscribe({
       next:()=>{
         console.log('Region deleted successfully');

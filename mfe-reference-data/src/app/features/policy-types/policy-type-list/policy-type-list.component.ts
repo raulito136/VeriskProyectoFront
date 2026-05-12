@@ -29,6 +29,7 @@ export class PolicyTypeListComponent {
   }
 
   loadAll(){
+    this.errores.set([]);
     this.loading.set(true);
     this.policyService.getPolicyTypes(this.showAll()).subscribe({
       next:(apiResponse)=>{
@@ -44,6 +45,7 @@ export class PolicyTypeListComponent {
   }
 
   delete(id:number){
+    this.errores.set([]);
     this.policyService.deletePolicyType(id).subscribe({
       next:(apiResponse)=>{
         console.log("Policy Type deleted successfully:", apiResponse);

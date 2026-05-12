@@ -9,7 +9,7 @@ import { ButtonComponent } from 'libs/ui/src/lib/button/button.component';
 
 @Component({
     selector: 'app-claim-status-list',
-    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent],
+    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent, LoaderComponent],
     templateUrl: './claim-status-list.component.html',
     styleUrl: './claim-status-list.component.css'
 })
