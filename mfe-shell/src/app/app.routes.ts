@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { loadRemoteModule } from '@nx/angular/mf';
+import { loadRemote } from '@module-federation/enhanced/runtime';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 export const appRoutes: Route[] = [
@@ -11,25 +11,53 @@ export const appRoutes: Route[] = [
   {
     path: 'claims',
     loadChildren: () =>
-      loadRemoteModule('mfe-claims', './Routes').then((m) => m.remoteRoutes),
+      loadRemote<any>('mfe-claims/Routes')
+        .then((m) => {
+          console.log('Claims module loaded:', m);
+          return m.remoteRoutes;
+        })
+        .catch((err) => {
+          console.error('Fatal error loading mfe-claims:', err);
+          throw err;
+        }),
   },
   {
     path: 'policies',
     loadChildren: () =>
-      loadRemoteModule('mfe-policies', './Routes').then((m) => m.policyRoutes),
+      loadRemote<any>('mfe-policies/Routes')
+        .then((m) => {
+          console.log('Policies module loaded:', m);
+          return m.policyRoutes;
+        })
+        .catch((err) => {
+          console.error('Fatal error loading mfe-policies:', err);
+          throw err;
+        }),
   },
   {
     path: 'policy-holders',
     loadChildren: () =>
-      loadRemoteModule('mfe-policies', './Routes').then(
-        (m) => m.policyHolderRoutes
-      ),
+      loadRemote<any>('mfe-policies/Routes')
+        .then((m) => {
+          console.log('Policies Holder module loaded:', m);
+          return m.policyHolderRoutes;
+        })
+        .catch((err) => {
+          console.error('Fatal error loading mfe-policies:', err);
+          throw err;
+        }),
   },
   {
     path: 'reference-data',
     loadChildren: () =>
-      loadRemoteModule('mfe-reference-data', './Routes').then(
-        (m) => m.remoteRoutes
-      ),
+      loadRemote<any>('mfe-reference-data/Routes')
+        .then((m) => {
+          console.log('Reference Data module loaded:', m);
+          return m.remoteRoutes;
+        })
+        .catch((err) => {
+          console.error('Fatal error loading mfe-reference-data:', err);
+          throw err;
+        }),
   },
 ];
