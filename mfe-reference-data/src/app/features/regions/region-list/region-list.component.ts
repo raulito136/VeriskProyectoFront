@@ -42,7 +42,7 @@ export class RegionListComponent {
   }
 
   delete(id:number){
-      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de póliza?');
+      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de Region?');
 
   if (!confirmed) return;
     this.errores.set([]);

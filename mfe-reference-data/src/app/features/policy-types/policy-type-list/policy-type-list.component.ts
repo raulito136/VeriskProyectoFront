@@ -45,7 +45,7 @@ export class PolicyTypeListComponent {
   }
 
   delete(id: number) {
-  const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de póliza?');
+  const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de Policy?');
 
   if (!confirmed) return;
 
