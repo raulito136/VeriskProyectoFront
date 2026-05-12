@@ -4,6 +4,11 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 
 export const appRoutes: Route[] = [
   {
+    path: 'claims',
+    loadChildren: () =>
+      loadRemoteModule('mfe-claims', './Routes').then((m) => m.remoteRoutes),
+  },
+  {
     path: '',
     component: WelcomeComponent,
     pathMatch: 'full', // URL must be EMPTY

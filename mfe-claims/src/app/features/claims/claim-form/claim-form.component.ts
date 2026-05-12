@@ -2,12 +2,10 @@ import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClaimService } from '../../../services/claim.service';
-// Importamos la UI
 import { FormComponent, InputComponent, ButtonComponent, DatepickerComponent } from '@policy-system/ui';
 
 @Component({
   selector: 'app-claim-form',
-  // Añadimos a imports
   imports: [ReactiveFormsModule, FormComponent, InputComponent, ButtonComponent, DatepickerComponent],
   templateUrl: './claim-form.component.html'
 })
@@ -26,8 +24,8 @@ export class ClaimFormComponent {
   guardarDatos() {
     if (this.claimForm.valid) {
       this.claimService.createClaim(this.claimForm.value).subscribe({
-         next: () => this.router.navigate(['..']),
-         error: (err) => alert('Error: ' + JSON.stringify(err.error.errors))
+        next: () => this.router.navigate(['..']),
+        error: (err) => alert('Error: ' + JSON.stringify(err.error.errors))
       });
     }
   }

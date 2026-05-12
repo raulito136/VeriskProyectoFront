@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'lib-input',
@@ -7,8 +8,15 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputComponent),
+      multi: true
+    }
+  ]
 })
-export class InputComponent {
+export class InputComponent implements ControlValueAccessor {
   // Optional input for the label
   @Input() label: string = '';
 
@@ -31,9 +39,30 @@ export class InputComponent {
   // Tells the father every time the user writes something
   @Output() valueChange = new EventEmitter<string>();
 
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  writeValue(value: any): void {
+    this.value = value || '';
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+  }
+
   // This event gets the native keyboard event
   onInputChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
-    this.valueChange.emit(inputElement.value);
+    this.value = inputElement.value;
+    this.valueChange.emit(this.value);
+    this.onChange(this.value);
+    this.onTouched();
   }
 }

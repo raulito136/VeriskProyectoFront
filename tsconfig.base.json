@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@policy-system/ui": ["libs/ui/src/index.ts"],
-      "mfe-claims/Routes": ["mfe-claims/src/app/remote-entry/entry.routes.ts"],
+      "claims/Routes": ["mfe-claims/src/app/remote-entry/entry.routes.ts"],
       "@policy-system/shared-models": ["shared-models/src/index.ts"],
       "mfe-policies/Routes": [
         "mfe-policies/src/app/remote-entry/entry.routes.ts"

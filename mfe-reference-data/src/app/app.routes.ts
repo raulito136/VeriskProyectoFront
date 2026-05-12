@@ -10,43 +10,43 @@ import { RegionFormComponent } from './features/regions/region-form/region-form.
 
 export const appRoutes: Route[] = [
   {
-    path: 'reference-data/claim-statuses',
+    path: 'claim-statuses',
     component: ClaimStatusListComponent
   },
   {
-    path: 'reference-data/claim-statuses/new',
+    path: 'claim-statuses/new',
     component: ClaimStatusFormComponent
   },
   {
-    path: 'reference-data/claim-statuses/:id/edit',
+    path: 'claim-statuses/:id/edit',
     component: ClaimStatusFormComponent
   },
   {
-    path:'reference-data/policy-types', component: PolicyTypeListComponent
+    path:'policy-types', component: PolicyTypeListComponent
   },
   {
-    path:'reference-data/policy-types/new', component: PolicyTypeFormComponent
+    path:'policy-types/new', component: PolicyTypeFormComponent
   },
   {
-    path:'reference-data/policy-types/:id/edit', component: PolicyTypeFormComponent
+    path:'policy-types/:id/edit', component: PolicyTypeFormComponent
   },
   {
-    path:'reference-data/coverage-types', component: CoverageTypeListComponent
+    path:'coverage-types', component: CoverageTypeListComponent
   },
   {
-    path:'reference-data/coverage-types/new', component: CoverageTypeFormComponent
+    path:'coverage-types/new', component: CoverageTypeFormComponent
   },
   {
-    path:'reference-data/coverage-types/:id/edit', component: CoverageTypeFormComponent
+    path:'coverage-types/:id/edit', component: CoverageTypeFormComponent
   },
   {
-    path:'reference-data/regions', component: RegionListComponent
+    path:'regions', component: RegionListComponent
   },
   {
-    path:'reference-data/regions/new', component: RegionFormComponent
+    path:'regions/new', component: RegionFormComponent
   },
   {
-    path:'reference-data/regions/:id/edit', component: RegionFormComponent
+    path:'regions/:id/edit', component: RegionFormComponent
   },
-  {path: 'reference-data', redirectTo: 'reference-data/claim-statuses', pathMatch: 'full' }
+  {path: '', redirectTo: 'claim-statuses', pathMatch: 'full' }
 ];

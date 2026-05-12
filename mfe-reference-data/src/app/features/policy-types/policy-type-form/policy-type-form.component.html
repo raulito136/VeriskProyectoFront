@@ -1,1 +1,21 @@
-<p>policy-type-form works!</p>
+<lib-form [title]="isEditMode ? 'Editar Policy Type' : 'Crear Policy Type'" (formSubmit)="onSubmitForm($event)">
+
+    <div [formGroup]="myForm" class="flex flex-col gap-4">
+        @if(!isEditMode){
+            <lib-input label="Code" formControlName="code"/>
+        }
+    
+        <lib-input label="Name" formControlName="name"/>
+        <lib-textarea label="Description" formControlName="description"/>
+
+        @if(isEditMode){
+            <lib-switch label="Estado Activo" formControlName="isActive" [checked]="myForm.get('isActive')?.value ?? false" 
+            (checkedChange)="myForm.get('isActive')?.setValue($event)"/>
+        }
+    </div>
+      <div form-actions class="flex gap-2 justify-end">
+    <lib-button type="cancel" content="Cancelar" (buttonClick)="onCancel()"></lib-button>
+    <lib-button type="submit" [content]="isEditMode ? 'Guardar' : 'Crear'" [disabled]="myForm.invalid"></lib-button>
+  </div>
+
+</lib-form>

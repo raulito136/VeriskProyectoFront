@@ -11,8 +11,8 @@ export class PolicyTypeService {
   private http=inject(HttpClient);
   private apiUrl="http://localhost:5003/api/v1/policy-types";
 
-  getPolicyTypes(){
-    return this.http.get<PagedResponse<PolicyType>>(this.apiUrl);
+  getPolicyTypes(includeInactive: boolean = false){
+    return this.http.get<PagedResponse<PolicyType>>(`${this.apiUrl}?includeInactive=${includeInactive}`);
   }
 
   getPolicyTypeById(id:number){
