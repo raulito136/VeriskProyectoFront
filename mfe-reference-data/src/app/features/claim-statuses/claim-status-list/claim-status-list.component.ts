@@ -48,6 +48,9 @@ export class ClaimStatusListComponent {
   }
 
   delete(id:number){
+      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de póliza?');
+
+  if (!confirmed) return;
     this.errores.set([]);
     this.claimService.deleteClaimStatus(id).subscribe({
       next:(apiResponse)=>{

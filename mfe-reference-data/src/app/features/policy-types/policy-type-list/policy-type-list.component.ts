@@ -44,19 +44,23 @@ export class PolicyTypeListComponent {
     })
   }
 
-  delete(id:number){
-    this.errores.set([]);
-    this.policyService.deletePolicyType(id).subscribe({
-      next:(apiResponse)=>{
-        console.log("Policy Type deleted successfully:", apiResponse);
-        this.loadAll();
-      },
-      error:(err)=>{
-        console.error("Error deleting policy type:", err);
-        this.errores.set([err]);
-      }
-    })
-  }
+  delete(id: number) {
+  const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de póliza?');
+
+  if (!confirmed) return;
+
+  this.errores.set([]);
+  this.policyService.deletePolicyType(id).subscribe({
+    next: (apiResponse) => {
+      console.log("Policy Type deleted successfully:", apiResponse);
+      this.loadAll();
+    },
+    error: (err) => {
+      console.error("Error deleting policy type:", err);
+      this.errores.set([err]);
+    }
+  });
+}
 
   onShowAllChange(value: boolean) {
     console.log('Switch cambiado a:', value, 'haciendo llamada a la API...');
