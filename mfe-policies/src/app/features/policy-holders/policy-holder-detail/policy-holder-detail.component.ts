@@ -3,12 +3,25 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PolicyHolderService } from '../../../services/policy-holder.service';
 import { PolicyHolder } from '../../../models/policy-holder.model';
-import { CardComponent, ButtonComponent, LoaderComponent, TableComponent } from '@policy-system/ui';
+import {
+  CardComponent,
+  ButtonComponent,
+  LoaderComponent,
+  TableComponent,
+  InlineErrorComponent,
+} from '@policy-system/ui';
 
 @Component({
   selector: 'app-policy-holder-detail',
   standalone: true,
-  imports: [CommonModule, CardComponent, ButtonComponent, LoaderComponent, TableComponent],
+  imports: [
+    CommonModule,
+    CardComponent,
+    ButtonComponent,
+    LoaderComponent,
+    TableComponent,
+    InlineErrorComponent,
+  ],
   templateUrl: './policy-holder-detail.component.html',
   styleUrl: './policy-holder-detail.component.css',
 })
@@ -19,13 +32,13 @@ export class PolicyHolderDetailComponent implements OnInit {
 
   policyHolder?: PolicyHolder;
   isLoading = false;
-  errorMessages: string[] = [];
+  errorMessage: string = '';
 
   policyColumns = [
     { key: 'policyNumber', label: 'Policy Number' },
     { key: 'policyTypeCode', label: 'Type' },
     { key: 'status', label: 'Status' },
-    { key: 'startDate', label: 'Start Date' }
+    { key: 'startDate', label: 'Start Date' },
   ];
 
   ngOnInit(): void {
@@ -43,9 +56,11 @@ export class PolicyHolderDetailComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessages = err.error?.errors?.map((e: any) => e.message) || ['Failed to load details.'];
+        this.errorMessage = err.error?.errors?.map((e: any) => e.message) || [
+          'Failed to load details.',
+        ];
         this.isLoading = false;
-      }
+      },
     });
   }
 
@@ -61,5 +76,28 @@ export class PolicyHolderDetailComponent implements OnInit {
 
   onPolicySelect(row: any): void {
     this.router.navigate(['/policies', row.id]);
+  }
+
+  onDelete(id: number): void {
+    const confirmDelete = confirm(
+      'Are you sure you want to delete this policy? This action can not be undone.'
+    );
+
+    if (confirmDelete) {
+      this.isLoading = true;
+
+      this.service.deletePolicyHolder(id).subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/policy-holders']);
+        },
+        error: (err) => {
+          this.errorMessage =
+            err.error?.errors?.map((e: any) => e.message).join(', ') ||
+            'Error during policy remove.';
+          this.isLoading = false;
+        },
+      });
+    }
   }
 }
