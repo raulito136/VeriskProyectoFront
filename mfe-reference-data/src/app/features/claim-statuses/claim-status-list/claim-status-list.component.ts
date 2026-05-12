@@ -61,4 +61,22 @@ export class ClaimStatusListComponent {
       }
     })
   }
+
+  toggle(policy: ClaimStatus) {
+      if (policy.isActive) {
+        this.delete(policy.id);
+      } else {
+        this.errores.set([]);
+        this.claimService.activateClaimStatus(policy.id).subscribe({
+          next: (apiResponse) => {
+            console.log("Claim Status activated successfully:", apiResponse);
+            this.loadAll();
+          },
+          error: (err) => {
+            console.error("Error activating claim status:", err);
+            this.errores.set([err]);
+          }
+        });
+      }
+    }
 }

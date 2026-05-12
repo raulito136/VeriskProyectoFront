@@ -29,4 +29,8 @@ export class RegionService {
   deleteRegion(id:number){
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+   activateRegion(id: number) {
+      return this.http.put<ApiResponse<Region>>(`${this.apiUrl}/${id}/activate`, {});
+    }
 }
