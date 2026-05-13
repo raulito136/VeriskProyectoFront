@@ -7,10 +7,11 @@ import { RouterLink } from '@angular/router';
 import { SwitchComponent } from 'libs/ui/src/lib/switch/switch.component';
 import { LoaderComponent } from 'libs/ui/src/lib/loader/loader.component';
 import { ButtonComponent } from 'libs/ui/src/lib/button/button.component';
+import { ConfirmationComponent } from 'libs/ui/src/lib/confirmation/confirmation.component';
 
 @Component({
     selector: 'app-policy-type-list',
-    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent],
+    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent, ConfirmationComponent],
     templateUrl: './policy-type-list.component.html',
     styleUrl: './policy-type-list.component.css'
 })
@@ -22,6 +23,12 @@ export class PolicyTypeListComponent {
   public showAll = signal<boolean>(false);
 
   public errores = signal<string[]>([]);
+
+  title: string = '';
+  text: string = '';
+  isConfirming = false;
+  private resolveConfirmation: ((value: boolean) => void) | null = null;
+
 
 
   ngOnInit(){
@@ -44,10 +51,12 @@ export class PolicyTypeListComponent {
     })
   }
 
-  delete(id: number) {
-  const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de Policy?');
-
-  if (!confirmed) return;
+  async delete(id: number) {
+  const confirmationValue = await this.askForConfirmation(
+      'Confirm Delete',
+      'Are you sure you want to delete this Policy Type?'
+    );
+  if (!confirmationValue) return;
 
   this.errores.set([]);
   this.policyService.deletePolicyType(id).subscribe({
@@ -85,5 +94,25 @@ export class PolicyTypeListComponent {
     console.log('Switch cambiado a:', value, 'haciendo llamada a la API...');
     this.showAll.set(value);
     this.loadAll();
+  }
+
+  handleConfirmation(input: boolean): void {
+    this.isConfirming = false;
+
+    // if a promise waiting, resolve with the confirmation component Output
+    if (this.resolveConfirmation) {
+      this.resolveConfirmation(input);
+      this.resolveConfirmation = null; // Clean for any other attempt
+    }
+  }
+
+  askForConfirmation(title: string, text: string): Promise<boolean> {
+    this.title = title;
+    this.text = text;
+    this.isConfirming = true;
+
+    return new Promise<boolean>((resolve) => {
+      this.resolveConfirmation = resolve;
+    });
   }
 }

@@ -6,11 +6,12 @@ import { RouterLink } from '@angular/router';
 import { SwitchComponent } from 'libs/ui/src/lib/switch/switch.component';
 import { LoaderComponent } from 'libs/ui/src/lib/loader/loader.component';
 import { ButtonComponent } from 'libs/ui/src/lib/button/button.component';
+import { ConfirmationComponent } from 'libs/ui/src/lib/confirmation/confirmation.component';
 
 
 @Component({
     selector: 'app-coverage-type-list',
-    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent],
+    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent, ConfirmationComponent],
     templateUrl: './coverage-type-list.component.html',
     styleUrl: './coverage-type-list.component.css'
 })
@@ -22,6 +23,11 @@ export class CoverageTypeListComponent {
   errores = signal<string[]>([]);
 
   showAll = signal<boolean>(false);
+
+  title: string = '';
+  text: string = '';
+  isConfirming = false;
+  private resolveConfirmation: ((value: boolean) => void) | null = null;
 
   ngOnInit(){
       this.loadAll();
@@ -49,10 +55,13 @@ export class CoverageTypeListComponent {
     this.loadAll();
   }
 
-  delete(id:number){
-      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de Coverage Type?');
+  async delete(id:number){
+    const confirmationValue = await this.askForConfirmation(
+      'Confirm Delete',
+      'Are you sure you want to delete this Coverage Type?'
+    );
 
-  if (!confirmed) return;
+  if (!confirmationValue) return;
     this.errores.set([]);
     this.coverageService.deleteCoverageType(id).subscribe({
       next:(apiResponse)=>{
@@ -83,4 +92,24 @@ export class CoverageTypeListComponent {
           });
         }
       }
+
+    handleConfirmation(input: boolean): void {
+    this.isConfirming = false;
+
+    // if a promise waiting, resolve with the confirmation component Output
+    if (this.resolveConfirmation) {
+      this.resolveConfirmation(input);
+      this.resolveConfirmation = null; // Clean for any other attempt
+    }
+  }
+
+  askForConfirmation(title: string, text: string): Promise<boolean> {
+    this.title = title;
+    this.text = text;
+    this.isConfirming = true;
+
+    return new Promise<boolean>((resolve) => {
+      this.resolveConfirmation = resolve;
+    });
+  }
 }
