@@ -6,10 +6,11 @@ import { RouterLink } from '@angular/router';
 import { SwitchComponent } from 'libs/ui/src/lib/switch/switch.component';
 import { LoaderComponent } from 'libs/ui/src/lib/loader/loader.component';
 import { ButtonComponent } from 'libs/ui/src/lib/button/button.component';
+import { ConfirmationComponent } from 'libs/ui/src/lib/confirmation/confirmation.component';
 
 @Component({
     selector: 'app-region-list',
-    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent],
+    imports: [CommonModule, RouterLink, SwitchComponent, LoaderComponent, ButtonComponent, ConfirmationComponent],
     templateUrl: './region-list.component.html',
     styleUrl: './region-list.component.css'})
 export class RegionListComponent {
@@ -20,6 +21,11 @@ export class RegionListComponent {
 
   public errores= signal<string[]>([]);
   public showAll = signal<boolean>(false);
+
+  title: string = '';
+  text: string = '';
+  isConfirming = false;
+  private resolveConfirmation: ((value: boolean) => void) | null = null;
 
   ngOnInit(){
     this.loadAll();
@@ -41,10 +47,14 @@ export class RegionListComponent {
     })
   }
 
-  delete(id:number){
-      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de Region?');
+  async delete(id:number){
+    const confirmationValue = await this.askForConfirmation(
+      'Confirm Delete',
+      'Are you sure you want to delete this Region?'
+    );
 
-  if (!confirmed) return;
+
+  if (!confirmationValue) return;
     this.errores.set([]);
     this.regionService.deleteRegion(id).subscribe({
       next:()=>{
@@ -81,4 +91,24 @@ export class RegionListComponent {
             });
           }
         }
+
+   handleConfirmation(input: boolean): void {
+    this.isConfirming = false;
+
+    // if a promise waiting, resolve with the confirmation component Output
+    if (this.resolveConfirmation) {
+      this.resolveConfirmation(input);
+      this.resolveConfirmation = null; // Clean for any other attempt
+    }
+  }
+
+  askForConfirmation(title: string, text: string): Promise<boolean> {
+    this.title = title;
+    this.text = text;
+    this.isConfirming = true;
+
+    return new Promise<boolean>((resolve) => {
+      this.resolveConfirmation = resolve;
+    });
+  }
 }

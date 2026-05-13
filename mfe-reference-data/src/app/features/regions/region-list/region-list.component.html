@@ -1,4 +1,11 @@
 <div class="p-6 bg-white rounded-lg shadow-md">
+   @if(isConfirming) {
+    <lib-confirmation
+    [title]="title"
+    [text]="text"
+    (confirmAction)="handleConfirmation($event)"
+  />
+  }
   <div class="flex justify-between items-center mb-6 border-b pb-2">
     <h1 class="text-2xl font-bold text-slate-800">
       Regions
