@@ -34,4 +34,8 @@ export class PolicyTypeService {
   deletePolicyType(id:number){
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+
+  activatePolicyType(id: number) {
+    return this.http.put<ApiResponse<PolicyType>>(`${this.apiUrl}/${id}/activate`, {});
+  }
 }

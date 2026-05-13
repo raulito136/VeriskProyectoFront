@@ -50,6 +50,9 @@ export class CoverageTypeListComponent {
   }
 
   delete(id:number){
+      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de Coverage Type?');
+
+  if (!confirmed) return;
     this.errores.set([]);
     this.coverageService.deleteCoverageType(id).subscribe({
       next:(apiResponse)=>{
@@ -62,4 +65,22 @@ export class CoverageTypeListComponent {
       }
     })
   }
+
+  toggle(policy: CoverageType) {
+        if (policy.isActive) {
+          this.delete(policy.id);
+        } else {
+          this.errores.set([]);
+          this.coverageService.activateCoverageType(policy.id).subscribe({
+            next: (apiResponse) => {
+              console.log("Coverage Type activated successfully:", apiResponse);
+              this.loadAll();
+            },
+            error: (err) => {
+              console.error("Error activating coverage type:", err);
+              this.errores.set([err]);
+            }
+          });
+        }
+      }
 }

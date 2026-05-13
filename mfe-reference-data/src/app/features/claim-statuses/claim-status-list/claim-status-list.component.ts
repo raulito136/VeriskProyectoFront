@@ -48,6 +48,9 @@ export class ClaimStatusListComponent {
   }
 
   delete(id:number){
+      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este tipo de Claim Status?');
+
+  if (!confirmed) return;
     this.errores.set([]);
     this.claimService.deleteClaimStatus(id).subscribe({
       next:(apiResponse)=>{
@@ -58,4 +61,22 @@ export class ClaimStatusListComponent {
       }
     })
   }
+
+  toggle(policy: ClaimStatus) {
+      if (policy.isActive) {
+        this.delete(policy.id);
+      } else {
+        this.errores.set([]);
+        this.claimService.activateClaimStatus(policy.id).subscribe({
+          next: (apiResponse) => {
+            console.log("Claim Status activated successfully:", apiResponse);
+            this.loadAll();
+          },
+          error: (err) => {
+            console.error("Error activating claim status:", err);
+            this.errores.set([err]);
+          }
+        });
+      }
+    }
 }
