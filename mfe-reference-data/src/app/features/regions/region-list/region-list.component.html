@@ -1,4 +1,4 @@
-<div class="p-6 bg-white rounded-lg shadow-md">
+<div class="p-6 max-w-7xl mx-auto flex-row">
    @if(isConfirming) {
     <lib-confirmation
     [title]="title"
@@ -6,16 +6,20 @@
     (confirmAction)="handleConfirmation($event)"
   />
   }
-  <div class="flex justify-between items-center mb-6 border-b pb-2">
-    <h1 class="text-2xl font-bold text-slate-800">
-      Regions
-    </h1>
-    <lib-switch
+  <div class="flex justify-between items-center pb-2">
+    <div>
+      <h1 class="text-3xl font-bold text-slate-800">Regions</h1>
+      <p class="text-slate-500 mt-1">Manage regions.</p>
+    </div>
+    <div class="flex gap-2">
+      <lib-switch
       label="Mostrar Inactivos"
       [checked]="showAll()"
       (checkedChange)="onShowAllChange($event)">
     </lib-switch>
+    </div>
   </div>
+
     @if (errores().length > 0) {
   <div class="mb-6 p-4 border-l-4 border-red-500 bg-red-50 rounded-r-lg">
     <div class="flex items-center mb-2">
