@@ -9,6 +9,7 @@ import {
   LoaderComponent,
   TableComponent,
   InlineErrorComponent,
+  ConfirmationComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -21,6 +22,7 @@ import {
     LoaderComponent,
     TableComponent,
     InlineErrorComponent,
+    ConfirmationComponent,
   ],
   templateUrl: './policy-holder-detail.component.html',
   styleUrl: './policy-holder-detail.component.css',
@@ -33,6 +35,12 @@ export class PolicyHolderDetailComponent implements OnInit {
   policyHolder?: PolicyHolder;
   isLoading = false;
   errorMessage: string = '';
+
+  // Confirmation panel
+  title: string = '';
+  text: string = '';
+  isConfirming = false;
+  private resolveConfirmation: ((value: boolean) => void) | null = null; // Store the promise of the confirmation
 
   policyColumns = [
     { key: 'policyNumber', label: 'Policy Number' },
@@ -78,12 +86,13 @@ export class PolicyHolderDetailComponent implements OnInit {
     this.router.navigate(['/policies', row.id]);
   }
 
-  onDelete(id: number): void {
-    const confirmDelete = confirm(
+  async onDelete(id: number): Promise<void> {
+    const confirmationValue = await this.askForConfirmation(
+      'Confirm Delete',
       'Are you sure you want to delete this policy? This action can not be undone.'
     );
 
-    if (confirmDelete) {
+    if (confirmationValue) {
       this.isLoading = true;
 
       this.service.deletePolicyHolder(id).subscribe({
@@ -99,5 +108,26 @@ export class PolicyHolderDetailComponent implements OnInit {
         },
       });
     }
+  }
+
+  // Methods needed for confirmation
+  handleConfirmation(input: boolean): void {
+    this.isConfirming = false;
+
+    // if a promise waiting, resolve with the confirmation component Output
+    if (this.resolveConfirmation) {
+      this.resolveConfirmation(input);
+      this.resolveConfirmation = null; // Clean for any other attempt
+    }
+  }
+
+  askForConfirmation(title: string, text: string): Promise<boolean> {
+    this.title = title;
+    this.text = text;
+    this.isConfirming = true;
+
+    return new Promise<boolean>((resolve) => {
+      this.resolveConfirmation = resolve;
+    });
   }
 }

@@ -8,6 +8,7 @@ import {
   ButtonComponent,
   LoaderComponent,
   InlineErrorComponent,
+  ConfirmationComponent,
 } from '@policy-system/ui';
 
 @Component({
@@ -21,6 +22,7 @@ import {
     CurrencyPipe,
     DatePipe,
     InlineErrorComponent,
+    ConfirmationComponent,
   ],
   templateUrl: './policy-detail.component.html',
   styleUrl: './policy-detail.component.css',
@@ -33,6 +35,12 @@ export class PolicyDetailComponent implements OnInit {
   policy?: Policy;
   isLoading = false;
   errorMessage: string = '';
+
+  // Confirmation panel
+  title: string = '';
+  text: string = '';
+  isConfirming = false;
+  private resolveConfirmation: ((value: boolean) => void) | null = null; // Store the promise of the confirmation
 
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
@@ -73,12 +81,13 @@ export class PolicyDetailComponent implements OnInit {
     }
   }
 
-  onDelete(id: number): void {
-    const confirmDelete = confirm(
+  async onDelete(id: number): Promise<void> {
+    const confirmationValue = await this.askForConfirmation(
+      'Confirm Delete',
       'Are you sure you want to delete this policy? This action can not be undone.'
     );
 
-    if (confirmDelete) {
+    if (confirmationValue) {
       this.isLoading = true;
 
       this.service.deletePolicy(id).subscribe({
@@ -94,5 +103,26 @@ export class PolicyDetailComponent implements OnInit {
         },
       });
     }
+  }
+
+  // Methods needed for confirmation
+  handleConfirmation(input: boolean): void {
+    this.isConfirming = false;
+
+    // if a promise waiting, resolve with the confirmation component Output
+    if (this.resolveConfirmation) {
+      this.resolveConfirmation(input);
+      this.resolveConfirmation = null; // Clean for any other attempt
+    }
+  }
+
+  askForConfirmation(title: string, text: string): Promise<boolean> {
+    this.title = title;
+    this.text = text;
+    this.isConfirming = true;
+
+    return new Promise<boolean>((resolve) => {
+      this.resolveConfirmation = resolve;
+    });
   }
 }
