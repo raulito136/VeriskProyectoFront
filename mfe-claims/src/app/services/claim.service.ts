@@ -17,11 +17,19 @@ export class ClaimService {
     { id: 3, claimNumber: 'CLM-003', policyNumber: 'POL-789', statusCode: 'REJECTED', amount: 500, description: 'Robo de bicicleta (sin candado)', claimDate: '2024-05-10' }
   ];
 
-  getAllClaims(page = 1, pageSize = 20): Observable<any> {
+  getAllClaims(page = 1, pageSize = 20, statusCode?: string, policyNumber?: string): Observable<any> {
     if (this.useMock) {
-      return of({ data: this.mockClaims, totalCount: this.mockClaims.length });
+      let filtered = [...this.mockClaims];
+      if (statusCode) filtered = filtered.filter(c => c.statusCode === statusCode);
+      if (policyNumber) filtered = filtered.filter(c => c.policyNumber.includes(policyNumber));
+      return of({ data: filtered, totalCount: filtered.length });
     }
-    return this.http.get(`${this.apiUrl}?page=${page}&pageSize=${pageSize}`);
+
+    let url = `${this.apiUrl}?page=${page}&pageSize=${pageSize}`;
+    if (statusCode) url += `&statusCode=${statusCode}`;
+    if (policyNumber) url += `&policyNumber=${policyNumber}`;
+
+    return this.http.get(url);
   }
 
   getClaimById(id: number): Observable<any> {
@@ -48,5 +56,13 @@ export class ClaimService {
       return of({ success: true });
     }
     return this.http.patch(`${this.apiUrl}/${id}/status`, { statusCode: newStatus, changedBy: changedBy });
+  }
+  deleteClaim(id: number): Observable<any> {
+    if (this.useMock) {
+      const index = this.mockClaims.findIndex(c => c.id === +id);
+      if (index !== -1) this.mockClaims.splice(index, 1);
+      return of({ success: true });
+    }
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }

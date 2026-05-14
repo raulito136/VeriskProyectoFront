@@ -1,4 +1,9 @@
 <div class="p-8 max-w-4xl mx-auto">
+  <div class="flex items-center gap-4 mb-6">
+    <lib-button type="default" content="← Back" (buttonClick)="cancelar()"></lib-button>
+    <h1 class="text-3xl font-extrabold text-gray-800">New Claim</h1>
+  </div>
+
   <form [formGroup]="claimForm" (ngSubmit)="guardarDatos()">
     
     <!-- Tu lib-form nos da la caja con título -->
@@ -25,7 +30,6 @@
                    (valueChange)="claimForm.get('description')?.setValue($event)"></lib-input>
       </div>
 
-      <!-- El slot form-actions de tu lib-form -->
       <div form-actions class="flex gap-2 justify-end">
         <lib-button type="cancel" content="Cancel" (buttonClick)="cancelar()"></lib-button>
         <lib-button type="submit" content="Save Claim" (buttonClick)="guardarDatos()"></lib-button>
@@ -33,4 +37,11 @@
 
     </lib-form>
   </form>
+
+  <lib-confirmation 
+    *ngIf="showModal()" 
+    [title]="modalTitle()" 
+    [text]="modalText()" 
+    (confirmAction)="onModalClose()">
+  </lib-confirmation>
 </div>
