@@ -44,7 +44,6 @@ export class ClaimStatusUpdateComponent implements OnInit {
   loadData() {
     this.loading.set(true);
     
-    // Load both claim and statuses
     this.claimService.getClaimById(this.claimId).subscribe(claimRes => {
       this.claimNumber.set(claimRes.data.claimNumber);
       this.currentStatus.set(claimRes.data.statusCode);

@@ -49,7 +49,6 @@ export class ClaimListComponent implements OnInit {
     this.loadStatuses();
     this.loadClaims();
     
-    // Subscribe to form changes for dynamic filtering with debounce
     this.filterForm.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged()

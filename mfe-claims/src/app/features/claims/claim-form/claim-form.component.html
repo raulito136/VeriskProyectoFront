@@ -30,7 +30,6 @@
                    (valueChange)="claimForm.get('description')?.setValue($event)"></lib-input>
       </div>
 
-      <!-- El slot form-actions de tu lib-form -->
       <div form-actions class="flex gap-2 justify-end">
         <lib-button type="cancel" content="Cancel" (buttonClick)="cancelar()"></lib-button>
         <lib-button type="submit" content="Save Claim" (buttonClick)="guardarDatos()"></lib-button>
