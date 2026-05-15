@@ -99,7 +99,7 @@
         <lib-input
           label="Coverage Amount"
           type="number"
-          placeholder="0.00"
+          placeholder="0"
           [value]="form.get('coverageAmount')?.value"
           (valueChange)="form.get('coverageAmount')?.setValue($event)"
           [name]="'coverageAmount'"
@@ -112,7 +112,7 @@
         <lib-input
           label="Premium Amount"
           type="number"
-          placeholder="0.00"
+          placeholder="0"
           [value]="form.get('premiumAmount')?.value"
           (valueChange)="form.get('premiumAmount')?.setValue($event)"
           [name]="'premiumAmount'"

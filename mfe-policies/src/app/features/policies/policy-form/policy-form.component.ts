@@ -19,6 +19,7 @@ import {
   LoaderComponent,
   InlineErrorComponent,
 } from '@policy-system/ui';
+import { max } from 'rxjs';
 
 @Component({
   selector: 'app-policy-form',
@@ -84,12 +85,19 @@ export class PolicyFormComponent implements OnInit {
   }
 
   private initForm(): void {
+    const maxDecimal = 9999999999999999;
     this.form = this.fb.group({
       policyHolderId: ['', [Validators.required]],
       policyTypeCode: ['', [Validators.required]],
       coverageTypeCode: ['', [Validators.required]],
-      coverageAmount: ['', [Validators.required, Validators.min(0.01)]],
-      premiumAmount: ['', [Validators.required, Validators.min(0.01)]],
+      coverageAmount: [
+        '',
+        [Validators.required, Validators.min(0.01), Validators.max(maxDecimal)],
+      ],
+      premiumAmount: [
+        '',
+        [Validators.required, Validators.min(0.01), Validators.max(maxDecimal)],
+      ],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
     });
@@ -145,6 +153,7 @@ export class PolicyFormComponent implements OnInit {
     if (control?.invalid && (control.dirty || control.touched)) {
       if (control.hasError('required')) return 'This field is required.';
       if (control.hasError('min')) return 'Must be greater than zero.';
+      if (control.hasError('max')) return 'Value exceeds the maximum allowed.';
     }
     return '';
   }
