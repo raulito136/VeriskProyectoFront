@@ -1,9 +1,13 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection, LOCALE_ID } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
 import { routes } from './app.routes';
 import { ClaimService } from './services/claim.service';
 import { ClaimCommentService } from './services/claim-comment.service';
+
+registerLocaleData(localeEs, 'es-ES');
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     ClaimService,
-    ClaimCommentService
+    ClaimCommentService,
+    { provide: LOCALE_ID, useValue: 'es-ES' }
   ],
 };

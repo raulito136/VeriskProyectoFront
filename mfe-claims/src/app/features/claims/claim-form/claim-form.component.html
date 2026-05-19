@@ -6,18 +6,17 @@
 
   <form [formGroup]="claimForm" (ngSubmit)="guardarDatos()">
     
-    <!-- Tu lib-form nos da la caja con título -->
     <lib-form title="Register a Claim" subtitle="Enter the details to submit for evaluation">
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <lib-input label="Policy Number" placeholder="Ex: POL-2026-001" 
+        <lib-input label="Policy Number" placeholder="Ex: POL-2026-00001" 
                    [value]="claimForm.get('policyNumber')?.value || ''" 
                    (valueChange)="claimForm.get('policyNumber')?.setValue($event)"></lib-input>
         
-        <!-- We parse the value back to number for the backend -->
-        <lib-input label="Claim Amount ($)" placeholder="Ex: 5000" type="number"
+        <lib-input label="Claim Amount ($)" placeholder="Ex: 50.000" type="text"
                    [value]="claimForm.get('amount')?.value || ''" 
-                   (valueChange)="claimForm.get('amount')?.setValue($event)"></lib-input>
+                   (valueChange)="onAmountChange($event)"
+                   (keydown)="onAmountKeydown($event)"></lib-input>
         
         <lib-datepicker label="Incident Date" 
                         [selectedDate]="claimForm.get('claimDate')?.value || ''" 
