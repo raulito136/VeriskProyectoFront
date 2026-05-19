@@ -25,7 +25,7 @@
       <div class="grid grid-cols-2 gap-4 my-4">
         <p><strong>Policy:</strong> {{ c.policyNumber }}</p>
         <p><strong>Date:</strong> {{ c.claimDate }}</p>
-        <p><strong>Amount:</strong> ${{ c.amount }}</p>
+        <p><strong>Amount:</strong> ${{ c.amount | number:'1.0-0':'es-ES' }}</p>
         <p><strong>Description:</strong> {{ c.description }}</p>
       </div>
 
@@ -36,7 +36,6 @@
       </div>
     </lib-card>
 
-    <!-- TABS -->
     <div class="mt-8 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
       <lib-tabs [tabs]="['Comments', 'Audit History']" [activeTab]="currentTab" (onTabChange)="currentTab = $event">
       </lib-tabs>

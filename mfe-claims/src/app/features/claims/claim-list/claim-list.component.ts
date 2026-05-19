@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, formatNumber } from '@angular/common';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { ClaimService } from '../../../services/claim.service';
@@ -41,7 +41,7 @@ export class ClaimListComponent implements OnInit {
     { key: 'claimNumber', label: 'Claim Number' },
     { key: 'policyNumber', label: 'Policy' },
     { key: 'statusCode', label: 'Status' },
-    { key: 'amount', label: 'Amount' },
+    { key: 'formattedAmount', label: 'Amount' },
     { key: 'claimDate', label: 'Date' }
   ];
 
@@ -70,7 +70,11 @@ export class ClaimListComponent implements OnInit {
     this.loading.set(true);
     const filters = this.filterForm.value;
     this.claimService.getAllClaims(1, 20, filters.statusCode, filters.policyNumber).subscribe(res => {
-      this.claimsList.set(res.data);
+      const formattedData = res.data.map((claim: any) => ({
+        ...claim,
+        formattedAmount: claim.amount != null ? '$' + formatNumber(claim.amount, 'es-ES', '1.0-0') : ''
+      }));
+      this.claimsList.set(formattedData);
       this.loading.set(false);
     });
   }
