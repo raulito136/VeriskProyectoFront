@@ -122,5 +122,12 @@ test.describe('Reference Data MFE', () => {
     const rowEdited=page.getByRole('row',{name: uniqueCode+'_EDIT'})
     await expect(rowEdited).toBeVisible();
   });
-});
 
+  test('should show innactive', async({page})=>{
+    await page.goto('/claim-statuses/');
+
+    await page.getByText('Show Inactive').click();
+    
+    await expect(page.getByRole('cell', { name: 'Inactive'}).first()).toBeVisible();
+  });
+});
